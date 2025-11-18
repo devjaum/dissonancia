@@ -1,0 +1,108 @@
+<main>
+    <section class="atributos">
+        <h2>Atributos</h2>
+        
+        <div class="stts">
+            <h3>Vida: <span>{{vida()}}</span></h3>
+            <h3>Shinsu: <span>{{shinsu()}}</span></h3>
+            <h3>Energia: <span>{{energia()}}</span></h3>
+            <h3 [style.color]="pointsAtt() < 1 ? '#ef5350' : 'inherit'">
+                Pontos: {{pointsAtt()}}
+            </h3>
+        </div>
+
+        <ul>
+            <li>
+                <span>Força (HP+)</span>
+                <div class="controls">
+                    <span>{{forca()}}</span>
+                    <button (click)="removePoint('forca')">-</button>
+                    <button (click)="addPoint('forca')">+</button>
+                </div>
+            </li>
+            <li>
+                <span>Destreza (PE++)</span>
+                <div class="controls">
+                    <span>{{destreza()}}</span>
+                    <button (click)="removePoint('destreza')">-</button>
+                    <button (click)="addPoint('destreza')">+</button>
+                </div>
+            </li>
+            <li>
+                <span>Constituição (HP++)</span>
+                <div class="controls">
+                    <span>{{constituicao()}}</span>
+                    <button (click)="removePoint('constituicao')">-</button>
+                    <button (click)="addPoint('constituicao')">+</button>
+                </div>
+            </li>
+            <li>
+                <span>Inteligência (Shinsu++)</span>
+                <div class="controls">
+                    <span>{{inteligencia()}}</span>
+                    <button (click)="removePoint('inteligencia')">-</button>
+                    <button (click)="addPoint('inteligencia')">+</button>
+                </div>
+            </li>
+            <li>
+                <span>Sabedoria (Shinsu+)</span>
+                <div class="controls">
+                    <span>{{sabedoria()}}</span>
+                    <button (click)="removePoint('sabedoria')">-</button>
+                    <button (click)="addPoint('sabedoria')">+</button>
+                </div>
+            </li>
+            <li>
+                <span>Carisma (PE+)</span>
+                <div class="controls">
+                    <span>{{carisma()}}</span>
+                    <button (click)="removePoint('carisma')">-</button>
+                    <button (click)="addPoint('carisma')">+</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="btn">
+            <button id="reset" (click)="reset()">Restaurar Padrões</button>
+        </div>
+    </section>
+
+    <section class="build">
+        <h2>Build Atual</h2>
+        <div class="build-tlts">
+            <ul>
+                <li *ngFor="let y of listaTalent().slice(1)">
+                    <p>
+                        <b>{{y}}</b><br>
+                        <small>{{getTalent(y)?.description}}</small>
+                    </p>
+                </li>
+                <li *ngIf="listaTalent().length <= 1" style="justify-content: center; opacity: 0.5;">
+                    <p>Nenhum talento selecionado.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="talentos">
+        <h2>Disponíveis - Pontos: {{pointsT()}}</h2>
+        <div class="tlts">
+            <ul>
+                <li *ngFor="let x of talent" 
+                    (mouseover)="showDescription(x)"  
+                    (mouseout)="hideDescription(x)" 
+                    (click)="addTalent(x)" 
+                    [id]="x.name"> 
+                    
+                    <b>{{x.name}}</b>
+                    
+                    <p id="cost-{{x.name}}" [style.color]="(x.peso <= pointsT()) ? '#80cbc4' : '#ef5350'" style="font-size: 0.8rem;">
+                        Custo: {{x.peso}}
+                    </p>
+
+                    <div [id]="x.name+x.peso" class="tooltip-content"></div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</main>
