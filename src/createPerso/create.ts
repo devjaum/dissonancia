@@ -107,8 +107,8 @@ export class CreatePerso {
       if(!docTalent) return;
 
       docTalent.style.backgroundColor = "#2e352cff";
-      docTalent.style.color = "#000000ff";
-      docPeso.style.color = "#004d40";
+      docTalent.style.color = "#FFF";
+      docPeso.style.color = "#53eed4ff";
 
       return;
     }
