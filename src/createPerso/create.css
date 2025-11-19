@@ -160,6 +160,11 @@ button {
 .talentos {
     grid-column: 1 / -1; 
     grid-row: 2 / 3;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+    height: 500px;
+    overflow-y: scroll;
+
 }
 
 .tlts > ul {
