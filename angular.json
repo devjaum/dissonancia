@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ficha-rpg": {
+    "dissonancia": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ficha-rpg:build:production"
+              "buildTarget": "dissonancia:build:production"
             },
             "development": {
-              "buildTarget": "ficha-rpg:build:development"
+              "buildTarget": "dissonancia:build:development"
             }
           },
           "defaultConfiguration": "development"

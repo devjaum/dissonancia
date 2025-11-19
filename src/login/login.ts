@@ -7,5 +7,5 @@ import { Component, signal } from '@angular/core';
   styleUrl: './login.css'
 })
 export class Login {
-  protected readonly title = signal('ficha-rpg');
+  protected readonly title = signal('dissonancia');
 }
