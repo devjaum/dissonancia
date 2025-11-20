@@ -71,7 +71,7 @@
         <h2>Build Atual</h2>
         <div class="build-tlts">
             <ul>
-                <li *ngFor="let y of listaTalent().slice(1)">
+                <li *ngFor="let y of listaTalent().slice(1)" (click)="removePointTalent(getTalent(y))">
                     <p>
                         <b>{{y}}</b><br>
                         <small>{{getTalent(y)?.description}}</small>
@@ -105,4 +105,8 @@
             </ul>
         </div>
     </section>
+
+    <div class="btn-salvar">
+        <button class="btnSalvar">Salvar</button>
+    </div>
 </main>

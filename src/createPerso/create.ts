@@ -35,7 +35,7 @@ export class CreatePerso {
       {name: "Vigoroso", description: "Você recebe +10 pontos de vida", peso: 2},
       {name: "Conhecimento de Batalha", description: "Uma vez por combate, você pode gastar 1 PE para identificar as resistências e vulnerabilidades de um inimigo", peso: 2},
       {name: "Furtividade", description: "Você é especialmente bom em nao ser percebido pelos inimigos, +2 em testes de Furtividade", peso: 2},
-      {name: "Regenerar", description: "Regenera pontos de vida no meio do combate (+1 a cada 2 turnos)", peso: 8},
+      {name: "Regenerar", description: "Regenera pontos de vida no meio do combate (+1 PV cada vez que chega seu turno)", peso: 8},
       {name: "Conhecimento arcano", description: "Você possui vasto conhecimento sobre magias e rituais, podendo reconhece-los +2 em testes de inteligência", peso: 2},
       {name: "Polivalente", description: "Escolha um atributo. Você recebe +1 em todos os testes relacionados a esse atributo e pode escolher uma perícia associada para receber +2 nela", peso: 7},
       {name: "Prodígio", description: "Você recebe +1 em todos os atributos", peso: 7},
@@ -52,7 +52,7 @@ export class CreatePerso {
       {name: "Cronometro", description: "O som de um relógio está constantemente em sua mente, permitindo se adaptar ao tempo de forma única. Você pode gastar 3 PE para agir novamente no final do turno atual (Ação bônus).", peso: 8},
       {name: "Olhar da Morte", description: "Uma vez por combate, você pode marcar um inimigo com sua sentença. Durante 3 turnos, seus ataques contra ele ignoram defesa, causam +1d6 de dano e não podem ser curados. Se o inimigo morrer nesse período, você recupera todo seu Shinsu.", peso: 10},
       {name: "Marca da Redenção", description: "Uma vez por combate, você pode marcar até 2 inimigos em alcance médio. Durante 2 turnos, qualquer dano causado a ele recupera toda a vida perdida do atacante. A marca desaparece se o inimigo morrer.", peso: 10},
-  
+      {name: "null", description: "Você não existe, mas age. Durante o combate, você ignora presença, tempo e espaço. Pode agir contra qualquer alvo, em qualquer lugar, sem ser percebido ou impedido. Tudo que você faz é inevitável.", peso: 11}
     ]
     listaTalent = signal([""]);
     forca = signal(2);
@@ -92,16 +92,15 @@ export class CreatePerso {
     }
 
     addTalent(talent: any){
-      if(this.pointsT() < talent.peso){
-        if(this.listaTalent().includes(talent.name)){
-          this.removePointTalent(talent);
-          return;
-        }
-      }
-      if(this.pointsT() < 1 || talent.peso > this.pointsT()) return;
-      if(this.listaTalent().includes(talent.name)){
+      if (this.listaTalent().includes(talent.name)) {
+        // Se já tem, remove.
         this.removePointTalent(talent);
         return;
+      }
+
+      if (talent.peso > this.pointsT()) {
+          // Se não tem e não pode pagar, retorna.
+          return;
       }
       
       this.pointsT.set( this.pointsT() - talent.peso);
