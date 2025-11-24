@@ -1,19 +1,239 @@
-main{
+/* Layout para login e senha com animação de glitch */ 
+main {
+    display: flex;
+    justify-content: center;
+    height: 95vh;
+    align-items: center;
+    background-color: #121212;
+    font-family: 'Courier New', Courier, monospace;
+}
+.login-container {
+    background: #1e1e1e;
     display: flex;
     flex-direction: column;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+.login-container::before,
+.login-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff00c8;
+    mix-blend-mode: screen;
+    opacity: 0.1;
+    pointer-events: none;
+    animation: glitch 2s infinite;
+}
+.login-container::after {
+    background: #00fff9;
+    animation-delay: 1s;
+}
+@keyframes glitch {
+    0% {
+        clip: rect(0, 100%, 0, 0);
+        transform: translate(0);
+    }
+    20% {
+        clip: rect(10px, 100%, 50px, 0);
+        transform: translate(-5px, -5px);
+    }
+    40% {
+        clip: rect(30px, 100%, 80px, 0);
+        transform: translate(5px, 5px);
+    }
+    60% {
+        clip: rect(50px, 100%, 100px, 0);
+        transform: translate(-5px, 5px);
+    }
+    80% {
+        clip: rect(70px, 100%, 120px, 0);
+        transform: translate(5px, -5px);
+    }
+    100% {
+        clip: rect(0, 100%, 0, 0);
+        transform: translate(0);
+    }
+}
+/* estelizar label (login) label(password) e o botão, que estão dentro de .login-container */
+.login-container label {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.login-container input {
+    margin-left: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.login-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff00c8;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    animation: glitch-button 1s infinite;    
+
 }
-label{
-    /*login e senha*/
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: white;
+.login-container button:hover {
+    /* efeito mais forte de glit */
+    background-color: #00fff9;
 }
+p{
+  
+
+}
+
+/* adicionar animação de glit no label e no botao */ 
+.login-container label,
+.login-container input {
+    position: relative;
+    animation: glitch-text 2s infinite;
+}
+@keyframes glitch-text {
+    0% {
+        text-shadow: none;
+    }
+    20% {
+        text-shadow: 1px 0 #ff00c8, -1px 0 #00fff9;
+    }
+    40% {
+        text-shadow: -1px 0 #ff00c8, 1px 0 #00fff9;
+    }
+    60% {
+        text-shadow: 1px 0 #ff00c8, -1px 0 #00fff9;
+    }
+    80% {
+        text-shadow: -1px 0 #ff00c8, 1px 0 #00fff9;
+    }
+    100% {
+        text-shadow: none;
+    }
+}
+@keyframes glitch-button {
+    0%   { transform: translate(0); filter: none; }
+    7%   { transform: translate(-3px, 20px) skewX(4deg); }
+    12%  { transform: translate(3px, -2px) skewX(-4deg); }
+    18%  { transform: translate(-2px, -1px); filter: hue-rotate(40deg); }
+    22%  { transform: translate(2px, 3px); }
+    30% {
+        box-shadow:
+            40px 40px 4px #00fff9,
+            -40px 0 4px #ff00c8;
+    }
+    45%  { transform: translate(3px, -15px); filter: hue-rotate(-40deg); }
+    60%  { transform: translate(-4px, 1px); }
+    80%  { transform: translate(2px, -3px) skewX(6deg); }
+    100% { transform: translate(0); filter: none; }
+}
+
+
+/* FUNDO GLITCH COM QUADRADOS SAINDO DA TELA */
+.fundo::before,
+.fundo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.1;
+    z-index: 2;
+}
+
+/* camada rosa */
+.fundo::before {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #ff00c8 0 4px,
+            transparent 4px 12px
+        );
+    animation: glitch-blocks 1.8s infinite steps(1);
+}
+
+/* camada ciano */
+.fundo::after {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #00fff9 0 6px,
+            transparent 6px 16px
+        );
+    animation: glitch-blocks2 1.8s infinite steps(1);
+    animation-delay: .3s;
+}
+
+
+/* QUADRADOS PULANDO PARA FORA */
+@keyframes glitch-blocks {
+    0% {
+        transform: translate(0,0) scale(1);
+        clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+    }
+    10% {
+        transform: translate(-15px,-10px) scale(1.05);
+        clip-path: polygon(0 0,100% 0,100% 40%,0 60%);
+    }
+    25% {
+        transform: translate(20px,5px) scale(1.07);
+        clip-path: polygon(0 20%,100% 5%,100% 70%,0 75%);
+    }
+    40% {
+        transform: translate(-25px,15px) scale(1.1);
+        clip-path: polygon(0 50%,100% 45%,100% 100%,0 90%);
+    }
+    60% {
+        transform: translate(10px,-20px) scale(1.06);
+        clip-path: polygon(0 0,100% 20%,100% 80%,0 60%);
+    }
+    80% {
+        transform: translate(-10px,10px) scale(1.04);
+        clip-path: polygon(0 30%,100% 0,100% 100%,0 85%);
+    }
+    100% {
+        transform: translate(0,0) scale(1);
+        clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+    }
+}
+
+@keyframes glitch-blocks2 {
+    0% {
+        transform: translate(0,0) scale(1);
+        clip-path: polygon(0 0,100% 100%,100% 100%,0 100%);
+    }
+    15% {
+        transform: translate(20px,-10px) scale(1.07);
+        clip-path: polygon(0 10%,100% 0,100% 40%,0 60%);
+    }
+    30% {
+        transform: translate(-20px,20px) scale(1.12);
+        clip-path: polygon(0 40%,100% 20%,100% 100%,0 75%);
+    }
+    55% {
+        transform: translate(15px,-15px) scale(1.05);
+        clip-path: polygon(0 0,100% 0,100% 70%,0 40%);
+    }
+    75% {
+        transform: translate(-15px,5px) scale(1.07);
+        clip-path: polygon(0 25%,100% 10%,100% 100%,0 100%);
+    }
+    100% {
+        transform: translate(0,0) scale(1);
+        clip-path: polygon(0 0,100% 100%,100% 100%,0 100%);
+    }
+}
+
