@@ -11,6 +11,12 @@
     --border-radius: 8px;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     --font-main: 'Roboto', sans-serif;
+    --bg-dark: #050508; /* Fundo ainda mais escuro */
+    /* Cores de glitch mais vibrantes e brilhantes */
+    --glitch-cyan: #00ffff; 
+    --glitch-magenta: #ff00ff;
+    /* Scanlines um pouco mais visíveis para textura */
+    --scanline-color: rgba(0, 255, 255, 0.05);
 }
 
 
@@ -21,4 +27,152 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    position: relative;
+    overflow-x: hidden; /* Essencial para evitar barras de rolagem durante os "pulos" do glitch */
+
+    /* === Camada Base: Scanlines === */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        var(--scanline-color) 2px,
+        var(--scanline-color) 4px,
+        rgba(0, 0, 0, 0.3) 4px,
+        rgba(0, 0, 0, 0.3) 6px
+    );
+    background-size: 100% 6px;
+}
+
+/* Configuração comum para os pseudo-elementos de glitch */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* O "pixel base" invisível a partir do qual as sombras são projetadas */
+    width: 2px; 
+    height: 2px;
+    z-index: -1;
+    will-change: transform, opacity; /* Otimização para animações rápidas */
+    mix-blend-mode: screen; /* Faz as cores brilharem quando se sobrepõem */
+}
+
+/* ====== CAMADA 1: GLITCH CIANO (::before) ====== */
+body::before {
+    opacity: 0.7;
+    /* Animação rápida e errática */
+    animation: glitch-anim-cyan 2s infinite linear alternate-reverse;
+    
+    /* A GRANDE LISTA DE QUADRADOS (Densidade Aumentada)
+       Sintaxe: offset-x | offset-y | blur(0) | spread(tamanho) | cor 
+       Usamos VW/VH para espalhar pela tela.
+    */
+    box-shadow: 
+        5vw 10vh 0 1px var(--glitch-cyan),
+        15vw 5vh 0 2px var(--glitch-cyan),
+        10vw 25vh 0 1px var(--glitch-cyan),
+        2vw 35vh 0 3px var(--glitch-cyan),
+        25vw 15vh 0 1px var(--glitch-cyan),
+        40vw 5vh 0 2px var(--glitch-cyan),
+        45vw 30vh 0 1px var(--glitch-cyan),
+        55vw 10vh 0 4px var(--glitch-cyan),
+        60vw 22vh 0 1px var(--glitch-cyan),
+        75vw 12vh 0 2px var(--glitch-cyan),
+        85vw 5vh 0 1px var(--glitch-cyan),
+        95vw 28vh 0 3px var(--glitch-cyan),
+        
+        /* Meio da tela */
+        5vw 55vh 0 1px var(--glitch-cyan),
+        18vw 45vh 0 2px var(--glitch-cyan),
+        35vw 65vh 0 4px var(--glitch-cyan),
+        42vw 50vh 0 1px var(--glitch-cyan),
+        65vw 45vh 0 2px var(--glitch-cyan),
+        70vw 60vh 0 1px var(--glitch-cyan),
+        88vw 52vh 0 3px var(--glitch-cyan),
+        
+        /* Parte inferior */
+        10vw 85vh 0 2px var(--glitch-cyan),
+        22vw 95vh 0 1px var(--glitch-cyan),
+        30vw 80vh 0 3px var(--glitch-cyan),
+        50vw 92vh 0 1px var(--glitch-cyan),
+        62vw 88vh 0 2px var(--glitch-cyan),
+        80vw 96vh 0 4px var(--glitch-cyan),
+        92vw 82vh 0 1px var(--glitch-cyan);
+}
+
+/* ====== CAMADA 2: GLITCH MAGENTA (::after) ====== */
+body::after {
+    opacity: 0.7;
+    /* Animação diferente para criar separação de cores */
+    animation: glitch-anim-magenta 2.5s infinite linear alternate;
+
+    /* Mais quadrados, em posições diferentes dos cianos */
+    box-shadow: 
+        8vw 2vh 0 2px var(--glitch-magenta),
+        12vw 18vh 0 1px var(--glitch-magenta),
+        28vw 8vh 0 3px var(--glitch-magenta),
+        35vw 22vh 0 1px var(--glitch-magenta),
+        52vw 3vh 0 2px var(--glitch-magenta),
+        68vw 15vh 0 1px var(--glitch-magenta),
+        82vw 2vh 0 4px var(--glitch-magenta),
+        92vw 12vh 0 2px var(--glitch-magenta),
+        
+        /* Meio */
+        2vw 48vh 0 1px var(--glitch-magenta),
+        25vw 58vh 0 2px var(--glitch-magenta),
+        38vw 42vh 0 1px var(--glitch-magenta),
+        58vw 52vh 0 3px var(--glitch-magenta),
+        72vw 45vh 0 1px var(--glitch-magenta),
+        85vw 62vh 0 2px var(--glitch-magenta),
+        98vw 55vh 0 1px var(--glitch-magenta),
+        
+        /* Parte inferior */
+        5vw 92vh 0 3px var(--glitch-magenta),
+        15vw 78vh 0 1px var(--glitch-magenta),
+        45vw 85vh 0 2px var(--glitch-magenta),
+        55vw 96vh 0 1px var(--glitch-magenta),
+        75vw 88vh 0 4px var(--glitch-magenta),
+        88vw 79vh 0 2px var(--glitch-magenta),
+        95vw 94vh 0 1px var(--glitch-magenta);
+}
+
+/* ====== ANIMAÇÕES DE GLITCH ====== */
+/* Definimos saltos bruscos na porcentagem para criar o efeito "travado" e "piscante" */
+
+@keyframes glitch-anim-cyan {
+    0% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    5% { transform: translate(-5px, 2px) skewX(2deg); opacity: 0.5; }
+    10% { transform: translate(5px, -2px) skewX(-2deg); opacity: 0.8; }
+    15% { transform: translate(-10px, 5px) skewX(5deg); opacity: 0.3; }
+    20% { transform: translate(5px, -5px) skewX(-5deg); opacity: 0.7; }
+    25% { transform: translate(0) skewX(0deg); opacity: 0.1; /* Piscar forte */ }
+    30% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    40% { transform: translate(-15px, 0) skewX(10deg); opacity: 0.6; }
+    50% { transform: translate(15px, 0) skewX(-10deg); opacity: 0.8; }
+    60% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    70% { transform: translate(0, 10px) skewX(0deg); opacity: 0.4; }
+    80% { transform: translate(0, -10px) skewX(0deg); opacity: 0.9; }
+    100% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+}
+
+@keyframes glitch-anim-magenta {
+    0% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    7% { transform: translate(5px, -5px) skewX(-3deg); opacity: 0.6; }
+    14% { transform: translate(-5px, 5px) skewX(3deg); opacity: 0.8; }
+    21% { transform: translate(10px, -2px) skewX(-5deg); opacity: 0.2; }
+    28% { transform: translate(-10px, 2px) skewX(5deg); opacity: 0.7; }
+    35% { transform: translate(0) skewX(0deg); opacity: 0.1; /* Piscar forte */ }
+    42% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    50% { transform: translate(20px, 0) skewX(-10deg); opacity: 0.5; }
+    65% { transform: translate(-20px, 0) skewX(10deg); opacity: 0.9; }
+    75% { transform: translate(0) skewX(0deg); opacity: 0.7; }
+    85% { transform: translate(0, -15px) skewX(0deg); opacity: 0.4; }
+    92% { transform: translate(0, 15px) skewX(0deg); opacity: 0.8; }
+    100% { transform: translate(0) skewX(0deg); opacity: 0.7; }
 }

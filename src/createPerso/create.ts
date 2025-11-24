@@ -67,8 +67,41 @@ export class CreatePerso {
     vida = computed(() => 5 + this.constituicao() * 10 + this.forca() * 5 + this.vidaExtra);
     shinsu = computed(() => 4 + this.inteligencia() * 12 + this.sabedoria() * 6);
     energia = computed(() => 1 + this.destreza() * 3 + this.carisma() * 2);
+    // Criar stts com valor any
+    stts = signal<any[]>([]);
+    ngStts(){
+      if(this.stts().length > 0){
+        this.forca.set(this.stts()[0]);
+        this.destreza.set(this.stts()[1]);  
+        this.constituicao.set(this.stts()[2]);
+        this.inteligencia.set(this.stts()[3]);
+        this.sabedoria.set(this.stts()[4]);
+        this.carisma.set(this.stts()[5]);
+        this.pointsAtt.set(this.stts()[6]);
+        this.pointsT.set(this.stts()[7]);
+        this.listaTalent.set(this.stts()[8]);
+        this.vidaExtra = this.stts()[9];
+      }
+    }
+
+    ngAfterViewInit() {
+      //Mudar a cor dos talentos que já estão selecionados
+      this.listaTalent().forEach(talentName => {
+        let talent = this.getTalent(talentName);
+        if(talent){
+          this.mudarCorTalent(talent);
+        }
+      });
+      this.ngStts();
+    }
 
     ngOnInit(){
+      this.talent.sort((a, b) => a.peso - b.peso);
+
+      let stts = localStorage.getItem("stts");
+      if(stts){
+        this.stts.set(JSON.parse(stts));
+      }
       this.talent.sort((a, b) => a.peso - b.peso);
     }
 
@@ -223,37 +256,37 @@ export class CreatePerso {
     removePoint(attribute: string) {
       switch (attribute) {
         case 'forca':
-          if (this.forca() > 2) {
+          if (this.forca() > 0) {
             this.forca.set(this.forca() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
           break;
         case 'destreza':
-          if (this.destreza() > 2) {
+          if (this.destreza() > 0) {
             this.destreza.set(this.destreza() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
           break;
         case 'constituicao':
-          if (this.constituicao() > 2) {
+          if (this.constituicao() > 0) {
             this.constituicao.set(this.constituicao() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
           break;
         case 'inteligencia':
-          if (this.inteligencia() > 2) {
+          if (this.inteligencia() > 0) {
             this.inteligencia.set(this.inteligencia() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
           break;
         case 'sabedoria':
-          if (this.sabedoria() > 2) {
+          if (this.sabedoria() > 0) {
             this.sabedoria.set(this.sabedoria() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
           break;
         case 'carisma':
-          if (this.carisma() > 2) {
+          if (this.carisma() > 0) {
             this.carisma.set(this.carisma() - 1);
             this.pointsAtt.set(this.pointsAtt() + 1);
           }
@@ -295,5 +328,23 @@ export class CreatePerso {
       }
       return;
     }
+
+    //Salvar no localstorage
+    save(){
+      this.stts.set([
+        this.forca(),
+        this.destreza(),
+        this.constituicao(),
+        this.inteligencia(),
+        this.sabedoria(),
+        this.carisma(),
+        this.pointsAtt(),
+        this.pointsT(),
+        this.listaTalent(),
+        this.vidaExtra     
+      ]);
+      localStorage.setItem("stts", JSON.stringify(this.stts()));
+    }
+
     constructor() {}
 }

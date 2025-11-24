@@ -242,9 +242,11 @@ button {
 }
 
 .btnSalvar:hover {
-    /* Um verde mais escuro no hover para feedback visual */
-    background-color: #4db6ac; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: var(--accent-hover);
+}
+
+.btnSalvar:active {
+    transform: scale(0.95);
 }
 
 .btn-salvar {
@@ -301,7 +303,6 @@ button {
     }
 }
 
-/* 1. Pseudo-elemento Glitch (Aberração Cromática) */
 #null::before {
     content: attr(id);
     position: absolute;
@@ -316,18 +317,17 @@ button {
     animation: glitch-shadow 0.5s infinite alternate-reverse; 
 }
 
-/* 2. Pseudo-elemento Partículas Saltantes */
 #null::after {
-    content: ''; /* Conteúdo vazio, não queremos texto duplicado */
+    content: ''; 
     position: absolute;
     top: 50%;
     left: 50%;
     width: 2px;
     height: 2px;
-    background: #ff00ff; /* Cor das partículas */
+    background: #ff00ff;
     z-index: 4;
     
-    /* Múltiplas sombras (simulando partículas) */
+
     box-shadow: 
         10px 5px 0 #00ffff,
         -15px -8px 0 #00ffff,
@@ -362,7 +362,6 @@ button {
     }
 }
 
-/* Nova Keyframe para o Efeito de Partículas Saltantes */
 @keyframes particle-burst {
     0% {
         transform: translate(-50%, -50%) scale(0);
