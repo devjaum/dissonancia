@@ -1,7 +1,31 @@
 <main class="fundo">
     <section class="login-container">
-        <label>Login: <input placeholder="login"></label>
-        <label>Senha: <input type="password" placeholder="senha"></label>
-        <button>Login</button>
+        
+        <label>Login: 
+            <input 
+                type="email" 
+                placeholder="login" 
+                [(ngModel)]="email" 
+                name="email"
+            >
+        </label>
+        
+        <label>Senha: 
+            <input 
+                type="password" 
+                placeholder="senha" 
+                [(ngModel)]="password" 
+                name="password"
+            >
+        </label>
+        
+        <p *ngIf="errorMessage" style="color: #ff00c8; text-align: center; margin-bottom: 10px;" class="error">
+            {{ errorMessage }}
+        </p>
+
+        <button (click)="login()">
+            Login
+        </button>
+
     </section>
 </main>

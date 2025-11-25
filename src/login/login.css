@@ -2,10 +2,10 @@
 main {
     display: flex;
     justify-content: center;
-    height: 95vh;
+    height: 100vh;
     align-items: center;
-    background-color: #121212;
     font-family: 'Courier New', Courier, monospace;
+    overflow-y: none;
 }
 .login-container {
     background: #1e1e1e;
@@ -97,7 +97,14 @@ p{
   
 
 }
-
+.error:before {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff0040;
+    font-weight: bold;
+}
 /* adicionar animação de glit no label e no botao */ 
 .login-container label,
 .login-container input {
@@ -141,99 +148,32 @@ p{
     100% { transform: translate(0); filter: none; }
 }
 
-
-/* FUNDO GLITCH COM QUADRADOS SAINDO DA TELA */
-.fundo::before,
-.fundo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    mix-blend-mode: screen;
-    opacity: 0.1;
+.fundo {
+    position: relative;
+    background-color: #000;
     z-index: 2;
 }
 
-/* camada rosa */
 .fundo::before {
-    background:
-        repeating-linear-gradient(
-            0deg,
-            #ff00c8 0 4px,
-            transparent 4px 12px
-        );
-    animation: glitch-blocks 1.8s infinite steps(1);
+    content: '';
+    position: absolute;
+    inset: 0;
+    
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 50, 255, 0.3) 1px, transparent 1px);
+        
+    /* AQUI: Aumentei de 50px para 100px. 
+       Quanto maior este número, mais espaço entre as linhas. */
+    background-size: 100px 100px;
+    z-index: -1;
+    animation: zoomInfinite 60s linear infinite;
 }
-
-/* camada ciano */
-.fundo::after {
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #00fff9 0 6px,
-            transparent 6px 16px
-        );
-    animation: glitch-blocks2 1.8s infinite steps(1);
-    animation-delay: .3s;
-}
-
-
-/* QUADRADOS PULANDO PARA FORA */
-@keyframes glitch-blocks {
+@keyframes zoomInfinite {
     0% {
-        transform: translate(0,0) scale(1);
-        clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-    }
-    10% {
-        transform: translate(-15px,-10px) scale(1.05);
-        clip-path: polygon(0 0,100% 0,100% 40%,0 60%);
-    }
-    25% {
-        transform: translate(20px,5px) scale(1.07);
-        clip-path: polygon(0 20%,100% 5%,100% 70%,0 75%);
-    }
-    40% {
-        transform: translate(-25px,15px) scale(1.1);
-        clip-path: polygon(0 50%,100% 45%,100% 100%,0 90%);
-    }
-    60% {
-        transform: translate(10px,-20px) scale(1.06);
-        clip-path: polygon(0 0,100% 20%,100% 80%,0 60%);
-    }
-    80% {
-        transform: translate(-10px,10px) scale(1.04);
-        clip-path: polygon(0 30%,100% 0,100% 100%,0 85%);
+        background-size: 100px 100px;
     }
     100% {
-        transform: translate(0,0) scale(1);
-        clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+        background-size: 500px 500px;
     }
 }
-
-@keyframes glitch-blocks2 {
-    0% {
-        transform: translate(0,0) scale(1);
-        clip-path: polygon(0 0,100% 100%,100% 100%,0 100%);
-    }
-    15% {
-        transform: translate(20px,-10px) scale(1.07);
-        clip-path: polygon(0 10%,100% 0,100% 40%,0 60%);
-    }
-    30% {
-        transform: translate(-20px,20px) scale(1.12);
-        clip-path: polygon(0 40%,100% 20%,100% 100%,0 75%);
-    }
-    55% {
-        transform: translate(15px,-15px) scale(1.05);
-        clip-path: polygon(0 0,100% 0,100% 70%,0 40%);
-    }
-    75% {
-        transform: translate(-15px,5px) scale(1.07);
-        clip-path: polygon(0 25%,100% 10%,100% 100%,0 100%);
-    }
-    100% {
-        transform: translate(0,0) scale(1);
-        clip-path: polygon(0 0,100% 100%,100% 100%,0 100%);
-    }
-}
-
