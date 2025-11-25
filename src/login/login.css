@@ -8,10 +8,12 @@ main {
     overflow-y: none;
 }
 .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #1e1e1e;
     display: flex;
     flex-direction: column;
-    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -66,6 +68,15 @@ main {
     color: #fff;
     margin-bottom: 20px;
     font-size: 18px;
+    width: 100%;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+label > input{
+    width: 80%;
+}
+.error{
+    width: 400px;
 }
 .login-container input {
     margin-left: 10px;
@@ -87,24 +98,14 @@ main {
     align-items: center;
     justify-content: center;
     animation: glitch-button 1s infinite;    
-
+    width: 90%;
+    margin-bottom: 20px;
 }
 .login-container button:hover {
     /* efeito mais forte de glit */
     background-color: #00fff9;
 }
-p{
-  
 
-}
-.error:before {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #ff0040;
-    font-weight: bold;
-}
 /* adicionar animação de glit no label e no botao */ 
 .login-container label,
 .login-container input {
@@ -133,16 +134,16 @@ p{
 }
 @keyframes glitch-button {
     0%   { transform: translate(0); filter: none; }
-    7%   { transform: translate(-3px, 20px) skewX(4deg); }
+    7%   { transform: translate(-3px, 1px) skewX(4deg); }
     12%  { transform: translate(3px, -2px) skewX(-4deg); }
     18%  { transform: translate(-2px, -1px); filter: hue-rotate(40deg); }
     22%  { transform: translate(2px, 3px); }
     30% {
         box-shadow:
-            40px 40px 4px #00fff9,
-            -40px 0 4px #ff00c8;
+            10px 5px 4px #00fff9,
+            -10px -5px 4px #ff00c8;
     }
-    45%  { transform: translate(3px, -15px); filter: hue-rotate(-40deg); }
+    45%  { transform: translate(3px, -1px); filter: hue-rotate(-40deg); }
     60%  { transform: translate(-4px, 1px); }
     80%  { transform: translate(2px, -3px) skewX(6deg); }
     100% { transform: translate(0); filter: none; }
