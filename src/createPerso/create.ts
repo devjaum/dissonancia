@@ -5,7 +5,7 @@ import { Component, signal, computed } from '@angular/core';
   selector: 'app-create',
   imports: [CommonModule],
   templateUrl: './create.html',
-  styleUrl: './create.css',
+  styleUrls: ['./create.css', './create2.css'],
   standalone: true
 })
 
