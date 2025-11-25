@@ -1,13 +1,13 @@
-//service
-import { Injectable, Inject } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Injectable, inject } from '@angular/core';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-    constructor(@Inject(AngularFireAuth) private afAuth: AngularFireAuth) {}
+    private auth = inject(Auth);
+
     login(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+        return signInWithEmailAndPassword(this.auth, email, password);
     }
 }

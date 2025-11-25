@@ -1,41 +1,41 @@
-import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <--- OBRIGATÓRIO
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './login.service';
-import { CommonModule } from '@angular/common'; // Bom ter para diretivas básicas
-
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // Garanta que isso está aqui ou é o padrão
-  imports: [FormsModule, CommonModule,],
-  providers: [AuthService],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export class Login {
-  // Signals são Writable (escrita), o readonly é só para a variável não ser reatribuída
-  protected email = signal(''); 
-  protected password = signal('');
-  protected isLogin = signal(true);
+  protected email = ''; 
+  protected password = '';
+  protected errorMessage = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router // Injetar o Router
+  ) {}
 
   login() {
-    // Para ler o valor do signal, usamos parenteses ()
-    const emailVal = this.email();
-    const passVal = this.password();
-
-    if (!emailVal || !passVal) {
-      console.error('Preencha os campos!');
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Preencha todos os campos!';
       return;
     }
 
-    this.authService.login(emailVal, passVal)
+    this.authService.login(this.email, this.password)
       .then(response => {
         console.log('Login successful:', response);
+
+        this.router.navigate(['/create']);
       })
       .catch(error => {
         console.error('Login failed:', error);
+        this.errorMessage = 'Erro ao entrar: Verifique o email e a senha.';
       });
   }
 }
