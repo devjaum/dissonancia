@@ -1,0 +1,48 @@
+<main class="main">
+    <section class="lore">
+        <h2>História e Detalhes</h2>
+        <p class="intro-text">Preencha os detalhes do seu personagem abaixo:</p>
+        
+        <div class="info-personagem">
+            <label>Qual seu nome?</label>
+            <input type="text" [(ngModel)]="name" placeholder="Digite o nome do seu personagem...">
+            
+            <label>Descreva sua classe (pode descrever como gostaria que ela fosse se quiser)</label>
+            <textarea [(ngModel)]="characterClass" rows="3" placeholder="Descreva a classe do seu personagem..."></textarea>
+        </div>
+
+        <div class="question-group">
+            <label>Como era sua história?</label>
+            <textarea [(ngModel)]="lore" rows="8" placeholder="Conte a história do seu personagem..."></textarea>
+        </div>
+
+        <div class="question-group">
+            <label>Quais são suas habilidades únicas? (somente duas)</label>
+            <textarea [(ngModel)]="uniqueSkills" rows="3" placeholder="Descreva suas duas habilidades únicas..."></textarea>
+        </div>
+
+        <div class="question-group">
+            <label>Qual é o sinal de alta pressão mágica que ocorre com você?</label>
+            <div class="options-container">
+                <label class="option-label">
+                    <input type="radio" name="pressureSign" value="Coração acelerado" [(ngModel)]="pressureSign">
+                    <span>Coração acelerado</span>
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="pressureSign" value="Ar denso" [(ngModel)]="pressureSign">
+                    <span>Ar denso</span>
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="pressureSign" value="Audição abafada" [(ngModel)]="pressureSign">
+                    <span>Audição abafada</span>
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="pressureSign" value="Arrepio" [(ngModel)]="pressureSign">
+                    <span>Arrepio</span>
+                </label>
+            </div>
+        </div>
+
+        <button class="btnSalvar" (click)="save()">Salvar História</button>
+    </section>
+</main>
