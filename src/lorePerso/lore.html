@@ -18,7 +18,14 @@
 
         <div class="question-group">
             <label>Quais são suas habilidades únicas? (somente duas)</label>
-            <textarea [(ngModel)]="uniqueSkills" rows="3" placeholder="Descreva suas duas habilidades únicas..."></textarea>
+            <div class="info-personagem">
+                <input [(ngModel)]="uniqueSkills[0].name" type="text" placeholder="Digite o nome da 1 habilidade">
+                <textarea [(ngModel)]="uniqueSkills[0].description" placeholder="Digite o que a habilidade faz"></textarea>
+            </div>
+            <div class="info-personagem">
+                <input [(ngModel)]="uniqueSkills[1].name" type="text" placeholder="Digite o nome da 2 habilidade">
+                <textarea [(ngModel)]="uniqueSkills[1].description" placeholder="Digite o que a habilidade faz"></textarea>
+            </div>
         </div>
 
         <div class="question-group">
