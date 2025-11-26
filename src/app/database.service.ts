@@ -70,4 +70,10 @@ export class DatabaseService {
     const docRef = doc(this.firestore, 'dissonancia-db', docId);
     return updateDoc(docRef, data);
   }
+
+   adminViewPlayers(): Observable<any[]> {
+      const usersCollection = collection(this.firestore, 'dissonancia-db');
+
+      return collectionData(usersCollection, { idField: 'id' });
+    }
 }

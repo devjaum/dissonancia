@@ -29,8 +29,10 @@ export class Login {
 
     this.authService.login(this.email, this.password)
       .then(response => {
-        console.log('Login successful:', response);
-
+        if(response.user.email === 'admin@rpg.com'){
+          this.router.navigate(['/admin']);
+          return;
+        }
         this.router.navigate(['/create']);
       })
       .catch(error => {

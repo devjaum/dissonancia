@@ -111,7 +111,6 @@ export class CreatePerso implements OnInit {
       this.talent.sort((a, b) => a.peso - b.peso);
 
       this.dbService.getCharacterByEmail().subscribe(character => {
-
         const user = this.auth.currentUser;
         if (user && user.email) {
              this.userEmail.set(user.email);
@@ -393,9 +392,7 @@ export class CreatePerso implements OnInit {
         this.vidaExtra     
       ]);
       if (!this.docId) {
-        //Salvar no banco
-        //Email vem do login.ts, usar aqui
-        //email@rpg.com, a senha sera email@rpg
+        
         const newCharacter = {
           email: this.userEmail(),
           password: this.userEmail().split('@')[0] + '@rpg',
@@ -410,10 +407,12 @@ export class CreatePerso implements OnInit {
           talent: this.listaTalent(),
         };
         this.dbService.saveUserData(newCharacter)
-          .then(() => alert('Salvo no Firebase com sucesso!'))
-          .catch(err => console.error('Erro ao salvar:', err));
-        this.router.navigate(['/lore']);
-        return;
+          .then(() => {
+            alert('Salvo no Firebase com sucesso!')
+            this.router.navigate(['/lore']);
+          })
+          .catch(err => console.error('Erro ao salvar:', err, newCharacter));
+          return;
       }
 
       const dadosAtualizados = {
