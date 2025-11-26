@@ -71,13 +71,14 @@
         <h2>Build Atual</h2>
         <div class="build-tlts">
             <ul>
-                <li *ngFor="let y of listaTalent().slice(1)" (click)="removePointTalent(getTalent(y))">
+                <li *ngFor="let y of listaTalent()" (click)="removePointTalent(getTalent(y))">
                     <p>
                         <b>{{y}}</b><br>
                         <small>{{getTalent(y)?.description}}</small>
                     </p>
                 </li>
-                <li *ngIf="listaTalent().length <= 1" style="justify-content: center; opacity: 0.5;">
+                
+                <li *ngIf="listaTalent().length === 0" style="justify-content: center; opacity: 0.5;">
                     <p>Nenhum talento selecionado.</p>
                 </li>
             </ul>

@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, OnInit, inject } from '@angular/core';
+import { DatabaseService } from '../app/database.service';
+import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-create',
@@ -9,8 +12,17 @@ import { Component, signal, computed } from '@angular/core';
   standalone: true
 })
 
-export class CreatePerso {
-  //Iniciar os atributos em 2
+export class CreatePerso implements OnInit {
+    constructor(
+      private router: Router
+    ){}
+
+    private dbService = inject(DatabaseService);
+    private docId: string | null = null;
+    private auth = inject(Auth);
+
+    userEmail = signal<string>("");
+
     talent = [
       {name: "Vontade de Ferro", description: "+2 em testes de resistência contra efeitos mentais(medo, charme, ilusão...)", peso: 2},
       {name: "Ataque focado", description: "Gasta 1 PE para receber +2 no acerto do próximo ataque", peso: 1},
@@ -54,7 +66,7 @@ export class CreatePerso {
       {name: "Marca da Redenção", description: "Uma vez por combate, você pode marcar até 2 inimigos em alcance médio. Durante 2 turnos, qualquer dano causado a ele recupera toda a vida perdida do atacante. A marca desaparece se o inimigo morrer.", peso: 10},
       {name: "null", description: "Você não existe, mas age. Durante o combate, você ignora presença, tempo e espaço. Pode agir contra qualquer alvo, em qualquer lugar, sem ser percebido ou impedido. Tudo que você faz é inevitável.", peso: 11}
     ]
-    listaTalent = signal([""]);
+    listaTalent = signal<string[]>([]);
     forca = signal(2);
     destreza = signal(2);
     constituicao = signal(2);
@@ -98,12 +110,49 @@ export class CreatePerso {
     ngOnInit(){
       this.talent.sort((a, b) => a.peso - b.peso);
 
-      let stts = localStorage.getItem("stts");
-      if(stts){
-        this.stts.set(JSON.parse(stts));
-      }
+      this.dbService.getCharacterByEmail().subscribe(character => {
+
+        const user = this.auth.currentUser;
+        if (user && user.email) {
+             this.userEmail.set(user.email);
+        }
+
+        if (character) {          
+          this.docId = (character as any).docId; 
+
+          if (character.status && character.status.length >= 6) {
+              this.forca.set(character.status[0]);
+              this.destreza.set(character.status[1]);
+              this.constituicao.set(character.status[2]);
+              this.inteligencia.set(character.status[3]);
+              this.sabedoria.set(character.status[4]);
+              this.carisma.set(character.status[5]);
+              this.pointsAtt.set(10 - (this.forca() + this.destreza() + this.constituicao() + this.inteligencia() + this.sabedoria() + this.carisma() - 12));
+          }
+
+          if (character.talent) {
+              this.listaTalent.set(character.talent);
+              setTimeout(() => this.atualizarVisuaisTalentos(), 100);
+              this.pointsT.set(10 - character.talent.reduce((sum: number, talentName: string) => {
+                  const talent = this.talent.find(t => t.name === talentName);
+                  return sum + (talent ? talent.peso : 0);
+              }, 0));
+          }
+          
+          // Preencher outros dados se necessário (nome, lore, etc.)
+        } else {
+          console.log('Nenhum personagem encontrado para este e-mail.');
+        }
+      });
       this.talent.sort((a, b) => a.peso - b.peso);
     }
+
+    atualizarVisuaisTalentos() {
+    this.listaTalent().forEach(talentName => {
+        const talent = this.getTalent(talentName);
+        if (talent) this.mudarCorTalent(talent);
+    });
+  }
 
     showDescription(talent: any) {
       let description = document.getElementById(talent.name+talent.peso);
@@ -343,8 +392,47 @@ export class CreatePerso {
         this.listaTalent(),
         this.vidaExtra     
       ]);
-      localStorage.setItem("stts", JSON.stringify(this.stts()));
-    }
+      if (!this.docId) {
+        //Salvar no banco
+        //Email vem do login.ts, usar aqui
+        //email@rpg.com, a senha sera email@rpg
+        const newCharacter = {
+          email: this.userEmail(),
+          password: this.userEmail().split('@')[0] + '@rpg',
+          status: [
+            this.forca(),
+            this.destreza(),
+            this.constituicao(),
+            this.inteligencia(),
+            this.sabedoria(),
+            this.carisma()
+          ],
+          talent: this.listaTalent(),
+        };
+        this.dbService.saveUserData(newCharacter)
+          .then(() => alert('Salvo no Firebase com sucesso!'))
+          .catch(err => console.error('Erro ao salvar:', err));
+        this.router.navigate(['/lore']);
+        return;
+      }
 
-    constructor() {}
+      const dadosAtualizados = {
+          status: [
+              this.forca(),
+              this.destreza(),
+              this.constituicao(),
+              this.inteligencia(),
+              this.sabedoria(),
+              this.carisma()
+          ],
+          talent: this.listaTalent(),
+      };
+
+      this.dbService.updateCharacter(this.docId, dadosAtualizados)
+          .then(() => {
+            alert('Salvo no Firebase com sucesso!');
+            this.router.navigate(['/lore']);
+          })
+          .catch(err => console.error('Erro ao salvar:', err));
+      }
 }
