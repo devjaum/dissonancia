@@ -21,6 +21,8 @@
 .cardPlayers {
     max-width: 1200px;
     margin: 0 auto;
+    /* retirar scrollbar */
+    overflow-x: hidden;
 }
 
 .cardPlayers ul {
@@ -175,6 +177,7 @@
     gap: 10px;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .stat-box {
@@ -275,6 +278,55 @@
     color: #4db6ac;
 }
 
+.has-tooltip-skills { cursor: help; }
+.has-tooltip-skills::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid var(--accent-color);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    width: max-content;
+    max-width: 300px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+}
+.has-tooltip-skills:hover::after { opacity: 1; visibility: visible; transition-delay: 0.1s; }
+
+.has-tooltip-talent { cursor: help; position: relative; border: 1px solid;}
+.has-tooltip-talent::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    transform: translateX(-50%);
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid var(--accent-color);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    width: max-content;
+    max-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    z-index: 1000;
+}
+.has-tooltip-talent:hover::after { opacity: 1; visibility: visible; transition-delay: 0.1s; }
 
 
 @media (max-width: 600px) {
