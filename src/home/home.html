@@ -1,0 +1,112 @@
+<main class="home-container">
+    
+    <!-- Verifica se o personagem carregou -->
+    <div *ngIf="character$ | async as player; else loading" class="content-wrapper">
+        
+        <h1 class="glitch-title">Ficha do jogador</h1>
+
+        <!-- O Card Único -->
+        <div class="card-container">
+            <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()">
+                <div class="card-inner">
+                    
+                    <!-- FRENTE -->
+                    <div class="cardFront">
+                        <div class="card-header">
+                            <h3>{{player.name || 'Agente Desconhecido'}}</h3>
+                            <div class="header-badges">
+                                <span class="role-badge has-tooltip" title="{{player.class || 'Classe não definida'}}">
+                                    {{player.class || 'N/A'}}
+                                </span>
+                                <span class="hp-badge">HP: {{player.vida}}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <p class="email"><strong>ID:</strong> {{player.email}}</p>
+                            
+                            <div class="cardHistoria">
+                                <h4>Registro (Lore):</h4>
+                                <p>{{player.lore || 'Nenhum registro encontrado no banco de dados...'}}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <small>> Clique para ver Habilidades e Status</small>
+                        </div>
+                    </div>
+
+                    <!-- VERSO -->
+                    <div class="cardBack">
+                        <h3>Dados de Combate</h3>
+                        
+                        <div class="stats-grid">
+                            <!-- Skills -->
+                            <div class="stat-box skills-container">
+                                <span>Poderes Únicos</span>
+                                <div *ngIf="player.uniqueSkills?.length; else noSkills">
+                                    <div *ngFor="let skill of player.uniqueSkills" class="skill-item has-tooltip-skills" [attr.data-tooltip]="skill.description">
+                                        <strong>{{skill.name}}</strong>
+                                    </div>
+                                </div>
+                                <ng-template #noSkills>
+                                    <p class="no-data">Nenhuma habilidade manifestada.</p>
+                                </ng-template>
+                            </div>
+
+                            <!-- Atributos -->
+                            <div class="stat-box">
+                                <span>Atributos</span>
+                                <div class="mini-stats" *ngIf="player.status">
+                                    <div class="stat-row">
+                                        <span>FOR</span>
+                                        <b>{{player.status[0]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[0]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>DES</span>
+                                        <b>{{player.status[1]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[1]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CON</span>
+                                        <b>{{player.status[2]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[2]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>INT</span>
+                                        <b>{{player.status[3]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[3]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>SAB</span>
+                                        <b>{{player.status[4]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[4]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CAR</span>
+                                        <b>{{player.status[5]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[5]}}</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Talentos -->
+                            <div class="stat-box">
+                                <span>Talentos</span>
+                                <div class="tags-list">
+                                    <span *ngFor="let t of player.talent" class="tag has-tooltip-talent" [attr.data-tooltip]="talentoDescricao(t)">{{t}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn">
+                    <button (click)="editInfo()">Editar informações</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Template de Carregamento -->
+    <ng-template #loading>
+        <div class="loading-container">
+            <p class="blink">Carregando dados do sistema...</p>
+        </div>
+    </ng-template>
+</main>

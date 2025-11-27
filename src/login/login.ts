@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './login.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../app/database.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class Login {
 
   constructor(
     private authService: AuthService,
+    private dbService: DatabaseService,
     private router: Router // Injetar o Router
   ) {}
 
@@ -30,7 +32,14 @@ export class Login {
     this.authService.login(this.email, this.password)
       .then(response => {
         if(response.user.email === 'admin@rpg.com'){
+          //Se for admin, encaminhar para o admin
           this.router.navigate(['/admin']);
+
+          return;
+        }
+        //Verificar se ja existe um personagem criado
+        if(this.dbService.hasCharacter(this.email)){
+          this.router.navigate(['/home'])
           return;
         }
         this.router.navigate(['/create']);
