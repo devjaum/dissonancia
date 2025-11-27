@@ -12,8 +12,12 @@
                         <div class="card-header">
                             <h3>{{player.name || 'Desconhecido'}}</h3>
                             <div class="header-badges">
-                                <span class="role-badge" title="{{player.class || 'N/A'}}">{{player.class || 'N/A'}}</span>
+                                <span class="role-badge has-tooltip-badge" [attr.data-tooltip]="player.class ?player.class : 'Classe desconhecida'">
+                                    {{player.class || 'N/A'}}
+                                </span>
                                 <span class="hp-badge">HP: {{player.vida}}</span>
+                                <span class="shinsu-badge">Shinsu: {{player.shinsu}}</span>
+                                <span class="mana-badge">Mana: {{player.mana}}</span>
                             </div>
                         </div>
 
