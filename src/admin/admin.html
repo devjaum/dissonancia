@@ -29,12 +29,16 @@
                     <!-- VERSO -->
                     <div class="cardBack">
                         <h3>Dados de Combate</h3>
+
+                        <div class="tech-tooltip-overlay" *ngIf="activeTooltip">
+                            {{activeTooltip}}
+                        </div>
+
                         <div class="stats-grid">
-                            <!-- Skills -->
                             <div class="stat-box skills-container">
                                 <span>Poderes Únicos</span>
-                                <div *ngFor="let skill of player.uniqueSkills" class="skill-item">
-                                    <strong title="{{skill.description}}">{{skill.name}}</strong>
+                                <div *ngFor="let skill of player.uniqueSkills" class="skill-item has-tooltip-skills" [attr.data-tooltip]="skill.description">
+                                    <strong>{{skill.name}}</strong>
                                    
                                 </div>
                             </div>
@@ -74,7 +78,7 @@
                             <div class="stat-box">
                                 <span>Talentos</span>
                                 <div class="tags-list">
-                                    <span *ngFor="let t of player.talent" class="tag" title="{{talentoDescricao(t)}}">{{t}}</span>
+                                    <span *ngFor="let t of player.talent" class="tag has-tooltip-talent" [attr.data-tooltip]="talentoDescricao(t)">{{t}}</span>
                                 </div>
                             </div>
                         </div>

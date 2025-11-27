@@ -8,7 +8,7 @@ import talentData from '../../public/talent.json'
 @Component({
     selector: "app-admin",
     templateUrl: "./admin.html",
-    styleUrls: ["./admin.css"],
+    styleUrls: ["./admin.css", "./tooltip.css"],
     standalone: true,
     imports: [CommonModule]
 })
@@ -67,8 +67,18 @@ export class Admin implements OnInit {
 
     ngOnInit(): void {}
 
+    activeTooltip: string | null = null;
+
     isFlipped(id: string): boolean {
         return this.flippedCards.has(id);
+    }
+
+    showTooltip(text: string) {
+        this.activeTooltip = text;
+    }
+
+    hideTooltip() {
+        this.activeTooltip = null;
     }
 
     toggleFlip(id: string): void {
