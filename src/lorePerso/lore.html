@@ -15,7 +15,41 @@
             <label>Como era sua história?</label>
             <textarea [(ngModel)]="lore" rows="8" placeholder="Conte a história do seu personagem..."></textarea>
         </div>
+         <div class="prologo-section">
+            <button type="button" class="btn-toggle-prologo" (click)="togglePrologue()">
+                {{ showPrologue ? 'Ocultar Prólogo' : 'Ler Prólogo (Lore do Mundo)' }}
+            </button>
 
+        <div class="prologo-content" *ngIf="showPrologue">
+                <textarea readonly>
+Vocês vivem no Brasil do século XXI. Seja no calor úmido do Norte, no concreto cinza do Sudeste ou nas serras frias do Sul, a vida segue seu ritmo normal. Para a imensa maioria da população, a realidade é apenas trabalho, estudo e boletos.
+
+Mas vocês sabem que isso é uma ilusão. O mundo possui duas camadas: a física e a mágica.
+
+A Regra de Ouro: O Estoque Existe uma energia invisível que permeia toda a vida: a Mana. Porém, diferente dos filmes, a magia não é infinita. Existe um "Estoque Mundial de Mana" — um reservatório global que se renova muito lentamente. O problema é matemático: a mana é dividida entre todos os seres vivos. Com a superpopulação, a fatia de energia para cada pessoa tornou-se minúscula. Hoje, a magia é tão diluída que é imperceptível para as massas.
+
+Quem são vocês? Vocês são a exceção estatística. Em meio a milhões de brasileiros, vocês nasceram com uma "ligação defeituosa" ou "privilegiada" ao Estoque. Vocês são Sensitivos (ou Irregulares em potencial).
+
+Enquanto outros viam apenas a vida passar, vocês cresceram com sensações estranhas que a medicina não explicava:
+
+Visão Duplicada: Às vezes, o mundo parece ter uma "segunda pele", um borrão de luz sobreposto às pessoas e objetos.
+
+O Arrepio: Uma sensação física de pressão na nuca quando algo "errado" está por perto.
+
+Instinto: Lâmpadas piscam perto de vocês quando estão nervosos; animais reagem de forma estranha à sua presença.
+
+O Evento: O Raio Invertido Recentemente, a "pressão atmosférica" da mana mudou. Onde quer que vocês estivessem — em uma praia no Nordeste, numa fazenda no Centro-Oeste ou num apartamento no Rio — vocês sentiram o ar ficar pesado. Dores de cabeça, zumbidos, a sensação de que algo estava sendo drenado de vocês.
+
+Então, numa noite de terça-feira, o céu reagiu. Mesmo que estivessem a quilômetros de distância de São Paulo, muitos relataram ver um clarão estranho no horizonte, ou sentiram o impacto espiritual de um raio azulado invertido subindo aos céus. O Professor Sérgio dos Santos caiu, e o Estoque foi violado.
+
+O Chamado No dia seguinte, a vibração no bolso. Uma mensagem de texto, vinda de um número desconhecido, brilhou na tela de vocês, não importando o DDD:
+
+“O professor caiu. O estoque está sendo drenado. Você também é alvo. Encontre o Círculo. Av. Domingos de Morais, Estacionamento 42, 23h, São Paulo.”
+
+Vocês não sabem quem é o Professor. Mas vocês sabem que o aviso é real. A sensação de perigo é visceral. O destino reuniu vocês, vindos de diferentes cantos do país, para um único ponto na Vila Mariana.
+                </textarea>
+        </div>
+        </div>
         <div class="question-group">
             <label>Quais são suas habilidades únicas? (somente duas)</label>
             <div class="info-personagem">

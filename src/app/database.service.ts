@@ -71,9 +71,19 @@ export class DatabaseService {
     return updateDoc(docRef, data);
   }
 
-   adminViewPlayers(): Observable<any[]> {
-      const usersCollection = collection(this.firestore, 'dissonancia-db');
+  hasCharacter(email: string): Observable<boolean> {
+    const usersCollection = collection(this.firestore, 'dissonancia-db');
+    // Busca na coleção onde o campo 'email' é igual ao email passado
+    const q = query(usersCollection, where('email', '==', email));
+    
+    return collectionData(q).pipe(
+      map(chars => chars.length > 0) // Transforma o array de resultados em true/false
+    );
+  }
 
-      return collectionData(usersCollection, { idField: 'id' });
-    }
+  adminViewPlayers(): Observable<any[]> {
+    const usersCollection = collection(this.firestore, 'dissonancia-db');
+
+    return collectionData(usersCollection, { idField: 'id' });
+  }
 }
