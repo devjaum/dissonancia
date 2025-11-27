@@ -97,16 +97,22 @@
     gap: 8px;
 }
 
-.role-badge, .hp-badge {
+.role-badge, .hp-badge, .mana-badge, .shinsu-badge {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
+    width: max-content;
+    height: max-content;
 }
+
+
 
 .role-badge { background: rgba(77, 182, 172, 0.2); color: #80cbc4; }
 .hp-badge { background: rgba(239, 83, 80, 0.2); color: #ef5350; }
+.mana-badge { background: rgba(100, 181, 246, 0.2); color: #64b5f6; }
+.shinsu-badge { background: rgba(171, 71, 188, 0.2); color: #ab47bc; }
 
 .card-body {
     flex: 1;
@@ -244,12 +250,23 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
 .has-tooltip-skills:hover::after { opacity: 1; visibility: visible; transition-delay: 0.1s; }
+.has-tooltip-skills:hover{
+    background-color: rgba(77, 182, 172, 0.2);
 
-.has-tooltip-talent { cursor: help; position: relative;}
+}
+
+.has-tooltip-talent { 
+    cursor: none;
+    margin-right: 10px;
+}
+.has-tooltip-talent:hover{
+    background-color: rgba(77, 182, 172, 0.2);
+
+}
 .has-tooltip-talent::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: 100%;
+    left: 50%;
     transform: translateX(-50%);
     background-color: #222;
     color: #ddd;
@@ -269,6 +286,41 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
 .has-tooltip-talent:hover::after { opacity: 1; visibility: visible; transition-delay: 0.1s; }
+
+.has-tooltip-badge { 
+    margin-right: 10px;
+}
+.header-badges{
+    position: relative;
+}
+.has-tooltip-badge:hover{
+    background-color: rgba(77, 182, 172, 0.2);
+
+}
+.has-tooltip-badge::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 30%;
+    transform: translateX(-50%);
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid var(--accent-color);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    width: max-content;
+    max-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+}
+.has-tooltip-badge:hover::after { opacity: 1; visibility: visible; transition-delay: 0.1s; }
 
 /* Loading */
 .loading-container { color: var(--accent-color); font-family: monospace; font-size: 1.2rem; }

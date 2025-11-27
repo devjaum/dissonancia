@@ -47,11 +47,17 @@ export class Home implements OnInit {
             // Cálculo da Vida
             const forca = Number(status[0]) || 0;
             const constituicao = Number(status[2]) || 0;
+            const inteligencia = Number(status[3]) || 0;
+            const sabedoria = Number(status[4]);
+            const destreza = Number(status[1]);
+            const carisma = Number(status[5]);
             const temVigoroso = talentList.includes("Vigoroso");
             
             // Verifica se tem vida extra salva (caso tenha comprado vigoroso depois)
             const vidaExtra = (player as any).vidaExtra || 0; 
             const vidaCalculada = 5 + (constituicao * 10) + (forca * 5) + (temVigoroso ? 10 : 0) + vidaExtra;
+            const shinsu = 4 + inteligencia * 12 + sabedoria * 6;
+            const mana = 1 + destreza * 3 + carisma * 2;
 
             // Tratamento de Skills
             let treatedSkills = (player as any).uniqueSkills;
@@ -65,7 +71,9 @@ export class Home implements OnInit {
                 ...player,
                 vida: vidaCalculada,
                 uniqueSkills: treatedSkills,
-                attrBonuses: bonusStrings
+                attrBonuses: bonusStrings,
+                shinsu: shinsu,
+                mana: mana
             };
         })
     );
