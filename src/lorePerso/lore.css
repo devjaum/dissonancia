@@ -163,6 +163,44 @@ textarea::placeholder {
     transform: scale(0.98);
 }
 
+.prologo-section {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+.btn-toggle-prologo {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-toggle-prologo:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.prologo-content {
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.prologo-content textarea {
+    height: 400px; /* Altura fixa maior para leitura */
+    background-color: #0a0a0a;
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border: none;
+}
+
+
 /* --- Responsividade --- */
 
 @media (max-width: 768px) {

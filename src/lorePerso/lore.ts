@@ -29,7 +29,8 @@ export class Lore implements OnInit {
     name: string = "";
     characterClass: string = "";
     lore: string = "";
-    
+    showPrologue: boolean = false;
+
     // Inicializa com 2 slots vazios para o usuário preencher
     uniqueSkills: Poderes[] = [
         { name: "", description: "" }, 
@@ -68,6 +69,10 @@ export class Lore implements OnInit {
         });
     }
 
+    togglePrologue() {
+        this.showPrologue = !this.showPrologue;
+    }
+
     save() {
         if (!this.docId) {
             alert('Erro: Personagem não encontrado. Crie a ficha base na tela anterior primeiro.');
@@ -85,8 +90,11 @@ export class Lore implements OnInit {
         this.dbService.updateCharacter(this.docId, dataToSave)
             .then(() => {
                 alert('História e detalhes salvos com sucesso!');
-                // Opcional: Navegar ou apenas avisar
-                this.router.navigate(['/']); 
+
+                //Criar um campo chamado "ok" no banco de dados, com valor true;
+                this.dbService.saveUserData({ ok: true });
+
+                this.router.navigate(['home']); 
             })
             .catch(err => {
                 console.error('Erro ao salvar história:', err);
