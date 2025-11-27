@@ -96,13 +96,18 @@
     gap: 5px;
 }
 
-.role-badge, .hp-badge {
+.role-badge, .hp-badge, .mana-badge, .shinsu-badge {
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: bold;
+    width: max-content;
+    height: max-content;
     text-transform: uppercase;
 }
+
+.mana-badge { background: rgba(100, 181, 246, 0.2); color: #64b5f6; }
+.shinsu-badge { background: rgba(171, 71, 188, 0.2); color: #ab47bc; }
 
 .role-badge {
     background: rgba(77, 182, 172, 0.2);

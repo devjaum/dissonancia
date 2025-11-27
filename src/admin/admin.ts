@@ -40,14 +40,22 @@ export class Admin implements OnInit {
 
             // --- FIM DO CÁLCULO ---
 
-            const forca = Number(status[0]) || 0;
+             const forca = Number(status[0]) || 0;
             const constituicao = Number(status[2]) || 0;
+            const inteligencia = Number(status[3]) || 0;
+            const sabedoria = Number(status[4]);
+            const destreza = Number(status[1]);
+            const carisma = Number(status[5]);
             const temVigoroso = talentList.includes("Vigoroso");
-
-            const vidaCalculada = 5 + (constituicao * 10) + (forca * 5) + (temVigoroso ? 10 : 0);
             
-            // Tratamento de Skills Únicas para exibição
-            let treatedSkills = player.uniqueSkills;
+            // Verifica se tem vida extra salva (caso tenha comprado vigoroso depois)
+            const vidaExtra = (player as any).vidaExtra || 0; 
+            const vidaCalculada = 5 + (constituicao * 10) + (forca * 5) + (temVigoroso ? 10 : 0) + vidaExtra;
+            const shinsu = 4 + inteligencia * 12 + sabedoria * 6;
+            const mana = 1 + destreza * 3 + carisma * 2;
+
+            // Tratamento de Skills
+            let treatedSkills = (player as any).uniqueSkills;
             if (!Array.isArray(treatedSkills)) {
                 treatedSkills = typeof treatedSkills === 'string' 
                     ? [{ name: 'Skill', description: treatedSkills }] 
@@ -58,7 +66,9 @@ export class Admin implements OnInit {
                 ...player,
                 vida: vidaCalculada,
                 uniqueSkills: treatedSkills,
-                attrBonuses: bonusStrings // Array de strings prontos para o HTML
+                attrBonuses: bonusStrings,
+                shinsu: shinsu,
+                mana: mana
             };
         }))
     );
