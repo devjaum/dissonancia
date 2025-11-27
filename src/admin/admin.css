@@ -1,3 +1,6 @@
+*{
+    user-select: none;
+}
 .admin-container {
     padding: 20px;
     min-height: 100vh;
@@ -264,6 +267,15 @@
     background: #444;
     border-radius: 2px;
 }
+
+.bonus {
+    font-size: 0.75rem;
+    margin-left: 2px;
+    font-weight: bold;
+    color: #4db6ac;
+}
+
+
 
 @media (max-width: 600px) {
     .cardPlayers ul {

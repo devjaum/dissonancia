@@ -1,85 +1,86 @@
 <main class="admin-container">
     <h1 class="glitch-title">Painel de Administrador</h1>
-    
+
     <section class="cardPlayers">
-       <ul>
-            <li *ngFor="let player of players$ | async" 
-                class="card" 
-                [class.flipped]="isFlipped(player.email)" 
+        <ul>
+            <li *ngFor="let player of players$ | async" class="card" [class.flipped]="isFlipped(player.email)"
                 (click)="toggleFlip(player.email)">
-                
+
                 <div class="card-inner">
-                    
                     <!-- FRENTE -->
                     <div class="cardFront">
                         <div class="card-header">
                             <h3>{{player.name || 'Desconhecido'}}</h3>
                             <div class="header-badges">
                                 <span class="role-badge" title="{{player.class || 'N/A'}}">{{player.class || 'N/A'}}</span>
-                                <!-- Mostra a VIDA calculada -->
                                 <span class="hp-badge">HP: {{player.vida}}</span>
                             </div>
                         </div>
-                        
+
                         <div class="card-body">
                             <p class="email"><strong>ID:</strong> {{player.email}}</p>
-                            
                             <div class="cardHistoria">
-                                <h4>Lore:</h4>
-                                <p>{{player.lore || '...'}}</p>
+                                <p>{{player.lore || 'Sem história...'}}</p>
                             </div>
                         </div>
-                        
-                        <div class="card-footer">
-                            <small>> Ver Ficha Técnica</small>
-                        </div>
+                        <div class="card-footer"><small>> Detalhes</small></div>
                     </div>
 
                     <!-- VERSO -->
                     <div class="cardBack">
                         <h3>Dados de Combate</h3>
-                        
                         <div class="stats-grid">
-                            
-                            <!-- Seção de Habilidades Únicas com *ngFor -->
+                            <!-- Skills -->
                             <div class="stat-box skills-container">
                                 <span>Poderes Únicos</span>
-                                
-                                <div *ngIf="player.uniqueSkills?.length; else noSkills">
-                                    <div *ngFor="let skill of player.uniqueSkills" class="skill-item">
-                                        <strong>{{skill.name}}</strong>
-                                        <p>{{skill.description}}</p>
-                                    </div>
-                                </div>
-                                
-                                <ng-template #noSkills>
-                                    <p class="no-data">Nenhuma habilidade registrada.</p>
-                                </ng-template>
-                            </div>
-                            
-                            <div class="stat-box">
-                                <span>Build / Talentos</span>
-                                <div class="tags-list">
-                                    <span *ngFor="let t of player.talent" class="tag">{{t}}</span>
+                                <div *ngFor="let skill of player.uniqueSkills" class="skill-item">
+                                    <strong title="{{skill.description}}">{{skill.name}}</strong>
+                                   
                                 </div>
                             </div>
 
                             <div class="stat-box">
                                 <span>Atributos</span>
                                 <div class="mini-stats" *ngIf="player.status">
-                                    <div class="stat-row"><span>FOR</span><b>{{player.status[0]}}</b></div>
-                                    <div class="stat-row"><span>DES</span><b>{{player.status[1]}}</b></div>
-                                    <div class="stat-row"><span>CON</span><b>{{player.status[2]}}</b></div>
-                                    <div class="stat-row"><span>INT</span><b>{{player.status[3]}}</b></div>
-                                    <div class="stat-row"><span>SAB</span><b>{{player.status[4]}}</b></div>
-                                    <div class="stat-row"><span>CAR</span><b>{{player.status[5]}}</b></div>
+                                    <!-- Usamos attrBonuses[index] para mostrar o bônus -->
+                                    <div class="stat-row">
+                                        <span>FOR</span>
+                                        <b>{{player.status[0]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[0]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>DES</span>
+                                        <b>{{player.status[1]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[1]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CON</span>
+                                        <b>{{player.status[2]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[2]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>INT</span>
+                                        <b>{{player.status[3]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[3]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>SAB</span>
+                                        <b>{{player.status[4]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[4]}}</span></b>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>CAR</span>
+                                        <b>{{player.status[5]}} <span class="bonus" style="color: aqua;">{{player.attrBonuses[5]}}</span></b>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Talentos -->
+                            <div class="stat-box">
+                                <span>Talentos</span>
+                                <div class="tags-list">
+                                    <span *ngFor="let t of player.talent" class="tag" title="{{talentoDescricao(t)}}">{{t}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </li>
-       </ul>
+        </ul>
     </section>
 </main>
