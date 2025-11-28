@@ -105,6 +105,10 @@
     text-transform: uppercase;
     width: max-content;
     height: max-content;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 80px;
+    text-overflow: ellipsis;
 }
 
 
