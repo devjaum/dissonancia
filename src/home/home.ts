@@ -98,6 +98,10 @@ export class Home implements OnInit {
         return aux;
     }
 
+    monsterPedia(){
+        this.router.navigate(['/monsterpedia']);
+    }
+
     editInfo(){
         this.router.navigate(['/create']);
     }

@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Guardião do Vestíbulo",
+        "lore": "O Guardião não é uma criatura no sentido comum. Ele é um fragmento da própria Torre, uma manifestação do espaço que testa os participantes.",
+        "form": "Sua forma é mutável, às vezes humanoide feito de luz 'quebrada', às vezes uma massa de sombra com asas cortadas",
+        "aparencia": "Corpo alto e fino, translúcido, como vidro preenchido por fúmaça. Braços longos que terminam em dedos afiados, nunca toca seu alvo, apenas o espaço ao redor. As 'asas de sombra' arrastam pelo chão, rachando o mármore branco em linhas negras. Onde deveria haver rosto, há apenas um vazio que pulsa como um coração invertido.",
+        "img": "monstros/guardiao_do_vestibulo_1.png"
+    },
+    {
+        "name": "A Besta do Vestíbulo",
+        "lore": "Quando o Guardião decide intensificar o teste, sua silhueta humanoide se desfaz em fragmentos de luz e sombras. Esses fragmentos se fundem no chão branco, rachando-o, e dali surge uma criatura, meio animal, meio entidade cósmica. Não é uma animal reconhecível, é uma fusão de predador e abismo",
+        "form": "Corpo quadrúpede, lembrando um felino ou lobo, mas com proporções distorcidas.",
+        "aparencia": "Patas longas demais, músculos tensos como cordas. Pele feita de sombra sólidas, mas com veio de luz azul correndo como rios sob a superfície. Cabeça alongada, sem olhos apenas uma fenda luminosa que abre e fecha como uma boca invertida. A cauda é múltipla, formada por fragmentos de mármore quebrado que flutuam e se rearranjam. Cada passo da criatura deixa rachaduras negras no chão, como se o espaço fosse incapaz de suportar sua presença.",
+        "img": "monstros/besta_do_vestibulo_1.png"
+    }
+]
