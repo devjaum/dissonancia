@@ -1,0 +1,183 @@
+*{
+    user-select: none;
+}
+
+/* Container Principal */
+.monstropedia-container {
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.glitch-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--accent-color, #4db6ac); /* Fallback se a variável não existir */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Grid das Cartas */
+.cardMonsters ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsivo */
+    gap: 30px;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* --- ESTRUTURA 3D DO CARD --- */
+.card {
+    background-color: transparent;
+    width: 100%;
+    height: 450px; /* Altura fixa para garantir consistência */
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Estilos Comuns Frente/Verso */
+.cardFront, .cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden; /* Importante para a imagem não vazar */
+    background-color: var(--card-bg, #1e1e24);
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- FRENTE --- */
+.cardFront {
+    /* Borda no topo para dar estilo */
+    border-top: 4px solid var(--danger-color, #ef5350); 
+}
+
+.image-container {
+    height: 70%; /* Ocupa a maior parte da frente */
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cobre a área sem distorcer (corta se necessário) */
+    transition: transform 0.5s ease;
+}
+
+.card:hover .cardFront img {
+    transform: scale(1.1); /* Zoom suave ao passar o mouse */
+}
+
+.card-header {
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.card-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-footer {
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.3);
+    color: #888;
+    font-size: 0.8rem;
+    font-family: monospace;
+}
+
+/* --- VERSO --- */
+.cardBack {
+    transform: rotateY(180deg);
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-top: 4px solid var(--accent-color, #4db6ac);
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+}
+
+.cardBack h3 {
+    color: var(--accent-color, #4db6ac);
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.info-scroll {
+    flex: 1;
+    overflow-y: auto; /* Permite rolar se o texto for muito longo */
+    padding-right: 5px; /* Espaço para a scrollbar */
+}
+
+.info-block {
+    margin-bottom: 15px;
+}
+
+.info-block h4 {
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    border-left: 3px solid var(--danger-color, #ef5350);
+    padding-left: 8px;
+}
+
+.info-block p {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: justify;
+}
+
+/* Scrollbar Personalizada */
+.info-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.info-scroll::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+.info-scroll::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}

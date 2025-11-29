@@ -1,0 +1,49 @@
+<main class="monstropedia-container">
+    <h1 class="glitch-title">Monstropédia</h1>
+    
+    <section class="cardMonsters">
+        <ul>
+            <li *ngFor="let monster of monstroPedia" 
+                class="card" 
+                [class.flipped]="isFlipped(monster.name)"
+                (click)="toggleFlip(monster.name)">
+                
+                <div class="card-inner">
+                    <div class="cardFront">
+                        <div class="image-container">
+                            <img [src]="monster.img" [alt]="monster.name" onerror="this.src='assets/monster-placeholder.png'">
+                        </div>
+                        <div class="card-header">
+                            <h3>{{ monster.name }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <small>> Clique para analisar</small>
+                        </div>
+                    </div>
+
+                    <div class="cardBack">
+                        <h3>{{ monster.name }}</h3>
+                        <div class="info-scroll">
+                            
+                            <div class="info-block">
+                                <h4>Lore</h4>
+                                <p>{{ monster.lore }}</p>
+                            </div>
+
+                            <div class="info-block">
+                                <h4>Forma</h4>
+                                <p>{{ monster.form }}</p>
+                            </div>
+
+                            <div class="info-block">
+                                <h4>Aparência</h4>
+                                <p>{{ monster.aparencia }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</main>
