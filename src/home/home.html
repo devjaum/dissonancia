@@ -1,5 +1,12 @@
 <main class="home-container">
-    
+    <button class="btnMonster" (click)="monsterPedia()">
+        <span class="square"></span>
+        <span class="square"></span>
+        <span class="square"></span>
+        <span class="square"></span>  
+        <b class="Text">Monstruário</b>
+    </button>
+
     <!-- Verifica se o personagem carregou -->
     <div *ngIf="character$ | async as player; else loading" class="content-wrapper">
         

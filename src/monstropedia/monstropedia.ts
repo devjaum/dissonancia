@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Importa o JSON (certifique-se que o caminho está correto e o arquivo existe)
 import monstroPediaJson from "../../public/monstropedia.json";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monstropedia',
@@ -16,7 +17,9 @@ export class Monstropedia {
     // Conjunto para guardar os nomes dos monstros virados
     flippedMonsters = new Set<string>();
 
-    constructor() {}
+    constructor(
+        private router: Router
+    ) {}
 
     // Verifica se está virado
     isFlipped(name: string): boolean {
@@ -30,5 +33,9 @@ export class Monstropedia {
         } else {
             this.flippedMonsters.add(name);
         }
+    }
+
+    voltarHome(){
+        this.router.navigate(['/home']);
     }
 }
