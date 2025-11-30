@@ -33,7 +33,7 @@ export class CreatePerso implements OnInit {
     inteligencia = signal(2);
     sabedoria = signal(2);
     carisma = signal(2);
-    pointsAtt = signal(10);
+    pointsAtt = signal(8);
     pointsT = signal(10);
     vidaExtra = 0;
     vida = computed(() => 5 + this.constituicao() * 10 + this.forca() * 5 + this.vidaExtra);
@@ -319,7 +319,7 @@ export class CreatePerso implements OnInit {
             this.inteligencia.set(3);
             this.sabedoria.set(3);
             this.carisma.set(3);
-            this.pointsAtt.set(10);
+            this.pointsAtt.set(8);
             aux = 1;
           }
         }
@@ -332,7 +332,7 @@ export class CreatePerso implements OnInit {
         this.inteligencia.set(2);
         this.sabedoria.set(2);
         this.carisma.set(2);
-        this.pointsAtt.set(10);
+        this.pointsAtt.set(8);
       }
       return;
     }

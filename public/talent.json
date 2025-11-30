@@ -203,5 +203,31 @@
         "name": "null",
         "description": "Você não existe, mas age. Durante o combate, você ignora presença, tempo e espaço. Pode agir contra qualquer alvo, em qualquer lugar, sem ser percebido ou impedido. Tudo que você faz é inevitável.",
         "peso": 11
+    },
+    {
+        "name": "Força Inabalável",
+        "description": "+2 em testes de força",
+        "peso": 2
+    },
+    {
+        "name": "Mãos Ligeiras",
+        "description": "+2 em testes de destreza",
+        "peso": 2
+    },
+    {
+        "name":"Carne de aço",
+        "description": "+2 em testes de constituição",
+        "peso": 2
+    },
+    {
+        "name": "Instinto de Sobrevivência",
+        "description": "+2 em testes de sabedoria",
+        "peso": 2
+    },
+    {
+        "name": "Presença Imponente",
+        "description": "+2 em testes de carisma",
+        "peso": 2
     }
+    
 ]

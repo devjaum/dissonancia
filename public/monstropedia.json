@@ -1,5 +1,12 @@
 [
     {
+        "name": "O Guardião da Torre",
+        "lore": "O Guardião não nasceu, não foi criado. Ele é a manifestação da Torre. Cada bloco que se move, cada engrenagem infinita que gira, é parte de sua consciência. Ele existe para impedir que qualquer ser atravesse a Torre sem provar sua essência. Não é maldade, não é bondade, é NECESSIDADE. Sua presença é tão densa que o espaço ao redor se curva. Olhar para ele é como encarar um espelo quebrado: você vê a si mesmo, mas distorcido.",
+        "form": "Estátura média com braços longos e finos, terminando em mãos com dedos alongados que parecem feitos de vidro quebrado.",
+        "aparencia": "Corpo translúcido, feito de fragmentos de luz e sombra que se movem lentamente, como se estivesse em constante transformação. Seus olhos são poços",
+        "img": "monstros/guardiao_da_torre_1.png"
+    },
+    {
         "name": "Guardião do Vestíbulo",
         "lore": "O Guardião não é uma criatura no sentido comum. Ele é um fragmento da própria Torre, uma manifestação do espaço que testa os participantes.",
         "form": "Sua forma é mutável, às vezes humanoide feito de luz 'quebrada', às vezes uma massa de sombra com asas cortadas",
@@ -12,5 +19,55 @@
         "form": "Corpo quadrúpede, lembrando um felino ou lobo, mas com proporções distorcidas.",
         "aparencia": "Patas longas demais, músculos tensos como cordas. Pele feita de sombra sólidas, mas com veio de luz azul correndo como rios sob a superfície. Cabeça alongada, sem olhos apenas uma fenda luminosa que abre e fecha como uma boca invertida. A cauda é múltipla, formada por fragmentos de mármore quebrado que flutuam e se rearranjam. Cada passo da criatura deixa rachaduras negras no chão, como se o espaço fosse incapaz de suportar sua presença.",
         "img": "monstros/besta_do_vestibulo_1.png"
+    },
+    {
+        "name": "Serpente da Névoa",
+        "lore": "Uma cobra tranlúcida que se esconde entre a neblina da floresta. Não é feita de carne, mas de vapor condensado.",
+        "form": "Serpente longa e fina, com escamas que parecem feitas de névoa sólida.",
+        "aparencia": "Corpo longo e esguio, com olhos brilhando em verde. Quando se move deixa um rastro de névoa.",
+        "img": "monstros/serpente_da_nevoa_1.png"
+    },
+    {
+        "name": "Cervo da Podridão",
+        "lore": "Um cervo que deveria ser mnajestoso, mas seu corpo está coberto de musgo e fungos. É um espírito da floresta corrompido",
+        "form": "Cervo grande com galhadas retorcidas e corpo coberto de vegetação em decomposição.",
+        "aparencia": "Chifres quebrados, pelo tomada por líquens e olhos sem pupilas",
+        "img": "monstros/cervo_da_podridao_1.png"
+    },
+    {
+        "name": "Coruja da meia-noite",
+        "lore": "Uma coruja enorme que caça viajantes perdidos. Seu canto não é som, mas um eco espiritual que confunde a mente.",
+        "form": "Coruja gigante com asas largas e garras afiadas.",
+        "aparencia": "Plumagem negra com reflexos azulados, olhos que brilham como lanternas.",
+        "img": "monstros/coruja_da_meia_noite_1.png"
+    },
+    {
+        "name": "Cachorro cogumelo",
+        "lore": "Um cão que vive nas profundezas da floresta, seu corpo é coberto por cogumelos e fungos. Ele é um guardião dos segredos subterrâneos.",
+        "form": "Cão de porte médio, com corpo robusto e patas fortes.",
+        "aparencia": "Pelo coberto por cogumelos de várias cores, olhos brilhantes e língua longa.",
+        "img": "monstros/cachorro_cogumelo_1.png"
+    },
+    {
+        "name": "Pantera Espectral",
+        "lore": "Uma fera lendária que ronda as florestas em silêncio absoluto. Dizem que ela é a própria sombra da noite, caçando intrusos que ousam atravessar o domínio da floresta.",
+        "form": "Felino colossal, com corpo translúcido e músculos tensos como cordas.",
+        "aparencia": "Pelagem negra com reflexos prateados, olhos que brilham em vermelho profundo, deixando rastros de névoa ao se mover.",
+        "img": "monstros/pantera_espectral_1.png"
+    },
+    {
+        "name": "Entidade do Abismo",
+        "lore": "Uma criatura que habita as profundezas do oceano, onde a luz nunca alcança. Sua presença é sentida como um vazio que suga toda a esperança.",
+        "form": "Ser amorfo, com tentáculos que se estendem em todas as direções.",
+        "aparencia": "Corpo escuro com olhos brilhantes que parecem estrelas distantes.",
+        "img": "monstros/entidade_do_abismo_1.png"
+    },
+    {
+        "name": "Caçador da Penumbra",
+        "lore": "Um predador ancestral que vaga entre as árvores mais densas da floresta. Ele não protege nada, apenas caça por instinto e prazer, deixando marcas de garras em troncos como aviso.",
+        "form": "Humanoide bestial, com corpo coberto de pelagem escura e membros alongados como de um felino.",
+        "aparencia": "Olhos amarelos que brilham no escuro, mandíbula alongada com presas afiadas, e garras que parecem lâminas de obsidiana.",
+        "img": "monstros/cacador_da_penumbra_1.png"
     }
+
 ]
