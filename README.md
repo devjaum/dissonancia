@@ -1,59 +1,112 @@
-# dissonancia
+# Dissonância
+**Status do Projeto:** Em Desenvolvimento ⚠️
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+Dissonância é uma aplicação web desenvolvida em **Angular** projetada para gerenciar fichas de personagens, lore e um bestiário (Monstropédia) para um RPG de mesa ambientado em um **Brasil moderno com elementos sobrenaturais e estética glitch/dark**.  
 
-## Development server
+A aplicação serve como companheiro digital para jogadores e mestres, permitindo a criação de builds, visualização de status em tempo real e consulta de monstros.
 
-To start a local development server, run:
+---
 
+## 🎨 Funcionalidades
+
+### 🔐 Autenticação e Sistema
+- **Login com Firebase**: Autenticação segura de usuários  
+- **Banco de Dados em Tempo Real**: Sincronização de dados dos personagens via Firestore  
+- **Roteamento**: Proteção de rotas e redirecionamento baseado no status do personagem (criação vs home)  
+
+### 👤 Criação e Gerenciamento de Personagens
+- **Sistema de Point Buy**: Distribuição de pontos de atributos (Força, Destreza, Constituição, Inteligência, Sabedoria, Carisma)  
+- **Cálculo Automático**: Status derivados (Vida, Shinsu, Energia) calculados automaticamente  
+- **Seletor de Talentos**: Lista dinâmica com custos variados e tooltips explicativos  
+- **Editor de Lore**: Área para escrita da história, habilidades únicas e sinais de pressão mágica  
+- **Prólogo Integrado**: Visualização da lore do mundo ("O Estoque", "O Evento") dentro da criação  
+
+### 🏠 Dashboard (Home)
+- **Ficha Digital 3D**: Card interativo com efeito *Flip* (Frente/Verso)  
+  - Frente: Resumo, classe e lore  
+  - Verso: Detalhes técnicos, bônus de atributos e lista de talentos  
+- **Estética Glitch**: Identidade visual imersiva com animações CSS personalizadas e tema escuro  
+
+### 📖 Monstropédia
+- **Bestiário Interativo**: Galeria de monstros (ex: Guardião da Torre, Cervo da Podridão)  
+- **Cards Expansíveis**: Lore, descrição da forma e aparência da criatura  
+
+### 🛡️ Painel do Mestre (Admin)
+- **Visão Geral**: Rota exclusiva para `admin@rpg.com`  
+- **Monitoramento**: Visualização de todas as fichas cadastradas no banco de dados  
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+- **Frontend**: Angular (v20+)  
+- **Linguagem**: TypeScript  
+- **Estilização**: CSS3 (Variáveis, Animações Keyframes, Flexbox/Grid)  
+- **Backend as a Service**: Firebase (Authentication & Firestore)  
+- **Build & Minificação**: Angular CLI & Grunt  
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### Pré-requisitos
+- Node.js (versão LTS recomendada)  
+- Angular CLI instalado globalmente:  
+  ```bash
+  npm install -g @angular/cli
+  ```
+## 1. Clonar e Instalar Dependências
 ```bash
-ng serve
+  # Clone o repositório
+git clone https://github.com/seu-usuario/dissonancia.git
+
+# Entre na pasta
+cd dissonancia
+
+# Instale as dependências
+npm install
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+## 2. Configurar o Firebase
+⚠️ O arquivo environment.ts está listado no .gitignore. Crie manualmente para conectar ao seu banco de dados.
+- Crie um projeto no Firebase Console
+- Habilite Authentication (Email/Senha) e Firestore Database
+- Crie o arquivo src/environment.ts com:
+```Typescript
+// src/environment.ts
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "SUA_API_KEY",
+    authDomain: "SEU_PROJECT_ID.firebaseapp.com",
+    projectId: "SEU_PROJECT_ID",
+    storageBucket: "SEU_PROJECT_ID.appspot.com",
+    messagingSenderId: "SEU_SENDER_ID",
+    appId: "SEU_APP_ID"
+  }
+};
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+## 3. Executar o Servidor de Desenvolvimento
+```Bash
+  ng serve
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
+- Acesse http://localhost:4200/ no navegador. O app recarrega automaticamente ao alterar arquivos.
+## 📂 Estrutura do Projeto
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+src/
+├── admin/          # Painel de visualização do Mestre
+├── app/            # Configurações globais e rotas
+├── createPerso/    # Tela de criação de ficha (Atributos/Talentos)
+├── home/           # Visualização da ficha do jogador
+├── login/          # Tela de Login com animações
+├── lorePerso/      # Input de história e skills
+├── monstropedia/   # Catálogo de monstros
+└── styles.css      # Estilos globais (Glitch effects, variáveis de cor)
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+## 🧪 Testes
+ - O projeto utiliza Karma e Jasmine para testes unitários.
+``` Bash
+  ng test
 ```
+## 📄 Licença
+ - Este projeto é feito com muito carinho, para meu primeiro RPG de mesa.
+ - Desenvolvido por *DevJaum*
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
