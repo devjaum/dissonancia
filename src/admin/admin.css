@@ -3,7 +3,7 @@
 }
 .admin-container {
     padding: 20px;
-    min-height: 100vh;
+    height: 100cqmax;
     background-color: var(--bg-dark, #050508);
     color: #fff;
     font-family: 'Roboto', sans-serif;
