@@ -9,6 +9,6 @@ export const routes: Routes = [
   {path: 'home', loadComponent: () => import('../home/home').then(m => m.Home)},
   {path: 'admin', component: Admin},
   {path: 'monsterpedia', loadComponent: () => import('../monstropedia/monstropedia').then(m => m.Monstropedia)},
-  
+  {path: 'guest', loadComponent: () => import('../noPlayer/notPlayer').then(m => m.NotPlayer)},
 ];
 
