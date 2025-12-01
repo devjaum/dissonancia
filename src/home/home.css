@@ -344,9 +344,7 @@
 .cardHistoria::-webkit-scrollbar-thumb, .stats-grid::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
 
 .btn > button{
-    background-color: var(--accent-color);
     border: none;
-    color: #000;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -355,16 +353,29 @@
     margin-top: 20px;
     border-radius: 6px;
     cursor: pointer;
+    width:max-content;
     transition: background-color 0.3s ease;
 }
 .btn > button:hover{
-    background-color: #00fff9;
+    /* deixar mais escuro */
+    filter: brightness(0.7);
 }
 .btn{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
+.info{
+    margin-top: 20px;
+    background-color: var(--accent-color);
+    color: white;
+}
+.logout{
+    margin-top: 20px;
+    background-color: #ff1744;
+    color: white;
+}
 /* --- Seu código original --- */
 .btnMonster {
     position: relative;

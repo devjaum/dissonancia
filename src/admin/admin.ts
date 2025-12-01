@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import talentData from '../../public/talent.json'
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-admin",
@@ -15,6 +16,10 @@ import talentData from '../../public/talent.json'
 export class Admin implements OnInit {
     private dbService = inject(DatabaseService);
     
+    constructor(
+        private router: Router
+    ){}
+
     players$: Observable<any[]> = this.dbService.adminViewPlayers().pipe(
         map(players => players.map(player => {
             const status = player.status || [0, 0, 0, 0, 0, 0];
@@ -75,7 +80,15 @@ export class Admin implements OnInit {
     talent = talentData;
     flippedCards = new Set<string>();
 
-    ngOnInit(): void {}
+    ngOnInit() {
+        let aux = this.dbService.isAdmin();
+        
+        aux.subscribe(isAdmin => {
+            if (!isAdmin) {
+                this.router.navigate(['/']);
+            }
+        });
+    }
 
     activeTooltip: string | null = null;
 

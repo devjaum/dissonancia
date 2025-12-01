@@ -19,6 +19,7 @@ export class Home implements OnInit {
         private router: Router
     ){}
     private dbService = inject(DatabaseService);
+
     talent = talentData;
     // Observable que busca e processa o personagem do usuário logado
     character$: Observable<any> = this.dbService.getCharacterByEmail().pipe(
@@ -81,10 +82,22 @@ export class Home implements OnInit {
     // Controle do giro do card
     isFlipped = false;
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.dbService.isAuthenticated().subscribe(isAuth => {
+            if (!isAuth) {
+                this.router.navigate(['/']);
+            }
+        });
+    }
+
+    logout(){
+        this.dbService.logout();
+        this.router.navigate(['/']);
+    }
 
     toggleFlip() {
         this.isFlipped = !this.isFlipped;
+        
     }
 
     talentoDescricao(id: string){
