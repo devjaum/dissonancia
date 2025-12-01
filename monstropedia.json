@@ -25,35 +25,130 @@
         "lore": "Uma cobra tranlúcida que se esconde entre a neblina da floresta. Não é feita de carne, mas de vapor condensado.",
         "form": "Serpente longa e fina, com escamas que parecem feitas de névoa sólida.",
         "aparencia": "Corpo longo e esguio, com olhos brilhando em verde. Quando se move deixa um rastro de névoa.",
-        "img": "monstros/serpente_da_nevoa_1.png"
+        "img": "monstros/serpente_da_nevoa_1.png",
+        "stts": [
+            {"name": "Força", "value": 2},
+            {"name": "Destreza", "value": 5},
+            {"name": "Constituição", "value": 3},
+            {"name": "Inteligência", "value": 5},
+            {"name": "Sabedoria", "value": 3},
+            {"name": "Carisma", "value": 2}
+        ],
+        "skills": [
+            {"name": "Corpo translúcido", "description": "A serpente pode se tornar quase invisível em ambientes com névoa ou neblina, ganhando vantagem em testes de Furtividade. (+1)"},
+            {"name": "Ataque venenoso", "description": "Se a serpente acertar um ataque corpo a corpo, o alvo deve fazer um teste de resistência de Constituição ou sofrerá 1d6 de dano venenoso e ficará envenenado por 2 turnos."},
+            {"name": "Rastro de névoa", "description": "A serpente pode deixar um rastro de névoa densa em uma área de 3 metros quadrados, dificultando a visão e concedendo cobertura total a criaturas dentro dela."},
+            {"name": "Constrição", "description": "A serpente pode usar sua ação para tentar agarrar uma criatura com seu corpo. O alvo deve ser menor que a serpente e falhar em um teste de resistência de Força ou Destreza (à escolha do alvo) para ser agarrado."},
+            {"name": "Esmagamento", "description": "Enquanto estiver agarrando uma criatura, a serpente tenta esmagar o alvo no início de cada um de seus turnos. O alvo deve fazer um teste de resistência de Constituição, sofrendo 2d6 de dano contundente em uma falha ou metade desse dano em um sucesso ou conseguindo se libertar, caso tenha +1 sucesso"}
+        ],
+        "nivelAmeaca": 2
     },
     {
         "name": "Cervo da Podridão",
         "lore": "Um cervo que deveria ser mnajestoso, mas seu corpo está coberto de musgo e fungos. É um espírito da floresta corrompido",
         "form": "Cervo grande com galhadas retorcidas e corpo coberto de vegetação em decomposição.",
         "aparencia": "Chifres quebrados, pelo tomada por líquens e olhos sem pupilas",
-        "img": "monstros/cervo_da_podridao_1.png"
+        "img": "monstros/cervo_da_podridao_1.png",
+        "stts": [
+            {"name": "Força", "value": 5},
+            {"name": "Destreza", "value": 3},
+            {"name": "Constituição", "value": 5},
+            {"name": "Inteligência", "value": 0},
+            {"name": "Sabedoria", "value": 3},
+            {"name": "Carisma", "value": 4}
+        ],
+        "skills": [
+            {"name": "Resistência à podridão", "description": "O cervo é imune a efeitos de veneno e doenças."},
+            {"name": "Chifres retorcidos", "description": "Se o cervo acertar um ataque corpo a corpo com seus chifres, o alvo deve fazer um teste de resistência de Força ou será empurrado 3 metros para trás e cairá no chão."},
+            {"name": "Cura natural", "description": "O cervo pode usar sua ação para recuperar 1d8 + 2 pontos de vida."},
+            {"name": "Passos silenciosos", "description": "O cervo tem vantagem em testes de Furtividade feitos para se mover silenciosamente através de terrenos naturais."},
+            {"name": "Aura de decomposição", "description": "Qualquer criatura que comece seu turno a 1,5 metro do cervo deve fazer um teste de resistência de Constituição ou sofrerá 1d2 de dano necrótico devido à aura de podridão do cervo."}
+        ],
+        "nivelAmeaca": 3
     },
     {
         "name": "Coruja da meia-noite",
         "lore": "Uma coruja enorme que caça viajantes perdidos. Seu canto não é som, mas um eco espiritual que confunde a mente.",
         "form": "Coruja gigante com asas largas e garras afiadas.",
         "aparencia": "Plumagem negra com reflexos azulados, olhos que brilham como lanternas.",
-        "img": "monstros/coruja_da_meia_noite_1.png"
+        "img": "monstros/coruja_da_meia_noite_1.png",
+        "stts": [
+            {"name": "Força", "value": 3},
+            {"name": "Destreza", "value": 5},
+            {"name": "Constituição", "value": 2},
+            {"name": "Inteligência", "value": 2},
+            {"name": "Sabedoria", "value": 5},
+            {"name": "Carisma", "value": 3}
+        ],
+        "skills": [
+            {"name": "Voo silencioso", "description": "A coruja pode voar sem fazer barulho, ganhando vantagem em testes de Furtividade enquanto estiver voando."},
+            {"name": "Garras afiadas", "description": "Se a coruja acertar um ataque corpo a corpo com suas garras, o alvo deve fazer um teste de resistência de Força ou ficará agarrado."},
+            {"name": "Visão noturna", "description": "A coruja pode ver no escuro até 18 metros como se fosse luz plena."},
+            {"name": "Canto hipnótico", "description": "A coruja pode usar sua ação para emitir um canto hipnótico. Todas as criaturas a 9 metros devem fazer um teste de resistência de Sabedoria ou ficarão encantadas por 1 minuto."},
+            {"name": "Ataque em mergulho", "description": "Se a coruja descer pelo menos 9 metros antes de atacar, ela causa 1d6 de dano adicional no ataque."}
+        ],
+        "nivelAmeaca": 3
     },
     {
         "name": "Cachorro cogumelo",
         "lore": "Um cão que vive nas profundezas da floresta, seu corpo é coberto por cogumelos e fungos. Ele é um guardião dos segredos subterrâneos.",
         "form": "Cão de porte médio, com corpo robusto e patas fortes.",
         "aparencia": "Pelo coberto por cogumelos de várias cores, olhos brilhantes e língua longa.",
-        "img": "monstros/cachorro_cogumelo_1.png"
+        "img": "monstros/cachorro_cogumelo_1.png",
+        "stts": [
+            {"name": "Força", "value": 4},
+            {"name": "Destreza", "value": 5},
+            {"name": "Constituição", "value": 5},
+            {"name": "Inteligência", "value": 0},
+            {"name": "Sabedoria", "value": 1},
+            {"name": "Carisma", "value": 5}
+        ],
+        "skills": [
+            {"name": "Cura inata", "description": "O cachorro se cura +1 em todos os turnos"},
+            {"name": "Mordida fúngica", "description": "Se o cachorro morder um alvo, ele 'planta cogumelos' no local da mordida, aumentando a velocidade do alvo, e aumentando a cura por turno do cachorro em +1, por mordida"},
+            {"name": "Amigo leal", "description": "O cachorro é vinculado com fungos, e tentará os proteger a todo custo, +2 em defesa contra ataques que ameaçam seus fungos"},
+            {"name": "Investida rápida", "description": "O cachorro pode se mover até o dobro de sua velocidade em um turno, mas não pode atacar nesse turno."},
+            {"name": "Latido assustador", "description": "O cachorro pode usar sua ação para soltar um latido alto e assustador. Todas as criaturas a 6 metros devem fazer um teste de resistência de Sabedoria ou ficarão amedrontadas por 2 turnos."}
+        ],
+        "nivelAmeaca": 4
     },
     {
         "name": "Pantera Espectral",
         "lore": "Uma fera lendária que ronda as florestas em silêncio absoluto. Dizem que ela é a própria sombra da noite, caçando intrusos que ousam atravessar o domínio da floresta.",
         "form": "Felino colossal, com corpo translúcido e músculos tensos como cordas.",
         "aparencia": "Pelagem negra com reflexos prateados, olhos que brilham em vermelho profundo, deixando rastros de névoa ao se mover.",
-        "img": "monstros/pantera_espectral_1.png"
+        "img": "monstros/pantera_espectral_1.png",
+        "stts": [
+            {"name": "Força", "value": 4},
+            {"name": "Destreza", "value": 5},
+            {"name": "Constituição", "value": 5},
+            {"name": "Inteligência", "value": 4},
+            {"name": "Sabedoria", "value": 1},
+            {"name": "Carisma", "value": 1}
+        ],
+        "skills": [
+            {
+                "name": "Instinto Predatório",
+                "description": "Se a Pantera derrubar um alvo abaixo de 50% da vida, ela ganha +2 dados em todos os ataques contra esse alvo até ele ser derrotado."
+            },
+            {
+                "name": "Rasgo Dimensional",
+                "description": "1 vez a cada 3 turnos, a Pantera pode se mover até 12 metros atravessando obstáculos ou criaturas. No final do movimento, ela realiza um ataque gratuito com +1 sucesso automático."
+            },
+            {
+                "name": "Mordida Espectral",
+                "description": "Se a Pantera causar dano com sua mordida, ela cria um eco espiritual do ataque. O alvo sofre 2 de dano adicional no início do próximo turno (ignora armadura e redução)."
+            },
+            {
+                "name": "Forma Sombria",
+                "description": "A Pantera pode se tornar parcialmente intangível até o início do próximo turno. Enquanto estiver nesse estado, ataques físicos contra ela têm sua reserva reduzida em -2 dados."
+            },
+            {
+                "name": "Sombra Afiada",
+                "description": "Ataques feitos a partir de áreas escuras ou penumbra recebem +2 de dano adicional se acertarem."
+            }
+        ]
+
     },
     {
         "name": "Entidade do Abismo",
@@ -67,7 +162,37 @@
         "lore": "Um predador ancestral que vaga entre as árvores mais densas da floresta. Ele não protege nada, apenas caça por instinto e prazer, deixando marcas de garras em troncos como aviso.",
         "form": "Humanoide bestial, com corpo coberto de pelagem escura e membros alongados como de um felino.",
         "aparencia": "Olhos amarelos que brilham no escuro, mandíbula alongada com presas afiadas, e garras que parecem lâminas de obsidiana.",
-        "img": "monstros/cacador_da_penumbra_1.png"
+        "img": "monstros/cacador_da_penumbra_1.png",
+        "stts": [
+            {"name": "Força", "value": 5},
+            {"name": "Destreza", "value": 5},
+            {"name": "Constituição", "value": 2},
+            {"name": "Inteligência", "value": 3},
+            {"name": "Sabedoria", "value": 4},
+            {"name": "Carisma", "value": 1}
+        ],
+        "skills":[
+            {
+                "name": "Salto Predatório",
+                "description": "O Caçador pode avançar até 6 metros e realizar um ataque imediato. Este ataque recebe +2 dados e, se acertar, empurra o alvo 1 metro e o desequilibra (-1 dado no próximo ataque do alvo)."
+            },
+            {
+                "name": "Garras de Obsidiana",
+                "description": "Quando o Caçador consegue 2 ou mais sucessos acima da Defesa do alvo, suas garras causam +3 de dano adicional em vez do bônus normal."
+            },
+            {
+                "name": "Visão Amarela",
+                "description": "Em áreas de baixa luminosidade ou escuridão parcial, o Caçador recebe +1 dado em todos os ataques e testes de percepção."
+            },
+            {
+                "name": "Rasgo Profundo",
+                "description": "Se o Caçador causar dano em um alvo que já foi ferido por ele neste combate, o ataque aplica um sangramento contínuo que causa +2 de dano no início de cada turno do alvo (até ser tratado)."
+            },
+            {
+                "name": "Instinto Sádico",
+                "description": "Se um inimigo cair a 0 PV, o Caçador entra em frenesi pelos próximos 2 turnos, ganhando +2 dados em ataques e +2 de movimento."
+            }
+        ]
     }
 
 ]
