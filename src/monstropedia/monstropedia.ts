@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core'; // 1. Adicione 'inject'
 import { CommonModule } from '@angular/common';
-// Importa o JSON (certifique-se que o caminho está correto e o arquivo existe)
 import monstroPediaJson from "../../public/monstropedia.json";
 import { Router } from '@angular/router';
+import { DatabaseService } from '../app/database.service'; // 2. Importe o DatabaseService
 
 @Component({
   selector: 'app-monstropedia',
@@ -13,20 +13,19 @@ import { Router } from '@angular/router';
 })
 export class Monstropedia {
     monstroPedia = monstroPediaJson;
-
-    // Conjunto para guardar os nomes dos monstros virados
     flippedMonsters = new Set<string>();
+    
+    // 3. Injete o serviço de banco de dados
+    private dbService = inject(DatabaseService);
 
     constructor(
         private router: Router
     ) {}
 
-    // Verifica se está virado
     isFlipped(name: string): boolean {
         return this.flippedMonsters.has(name);
     }
 
-    // Alterna o estado (vira/desvira)
     toggleFlip(name: string): void {
         if (this.flippedMonsters.has(name)) {
             this.flippedMonsters.delete(name);
@@ -35,7 +34,17 @@ export class Monstropedia {
         }
     }
 
+    // 4. Atualize a função voltarHome
     voltarHome(){
-        this.router.navigate(['/home']);
+        // Verifica se o usuário está logado
+        this.dbService.isAuthenticated().subscribe(isAuth => {
+            if (isAuth) {
+                // Se for jogador logado, volta para a Home
+                this.router.navigate(['/home']);
+            } else {
+                // Se não estiver logado (Guest), volta para a tela de convidado
+                this.router.navigate(['/guest']);
+            }
+        });
     }
 }

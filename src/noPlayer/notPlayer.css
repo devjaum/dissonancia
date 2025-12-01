@@ -1,0 +1,130 @@
+:host {
+    display: block;
+    --card-width: 700px; /* Um pouco menor para a demo */
+    --card-height: 400px;
+}
+
+.guest-container {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(circle at center, #1b1b1f 0%, #000000 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.glitch-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0;
+    text-shadow: 2px 2px 0px #ff00ff;
+    animation: glitch-text 3s infinite;
+}
+
+.subtitle {
+    color: #666;
+    font-family: monospace;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.actions {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+    z-index: 10;
+}
+
+.btn-action {
+    padding: 12px 24px;
+    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    font-family: var(--font-main);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.monster-btn:hover {
+    background: var(--accent-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+.login-btn {
+    border-color: #ff00c8;
+    color: #ff00c8;
+}
+
+.login-btn:hover {
+    background: #ff00c8;
+    color: #fff;
+    box-shadow: 0 0 15px #ff00c8;
+}
+
+.demo-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.demo-area h3 {
+    color: #444;
+    margin-bottom: 20px;
+    font-family: monospace;
+}
+
+/* --- REUTILIZAÇÃO DO CSS DO CARD --- */
+/* Copiado e adaptado de home.css para funcionar isoladamente */
+.card-container {
+    width: var(--card-width);
+    height: var(--card-height);
+    perspective: 1500px;
+    cursor: pointer;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card.flipped { transform: rotateY(180deg); }
+
+.cardFront, .cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #1e1e24;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    display: flex;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.front-sidebar {
+    width: 30%;
+    background: rgba(0,0,0,0.2);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}

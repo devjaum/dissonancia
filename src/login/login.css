@@ -171,6 +171,20 @@ label > input{
     z-index: -1;
     animation: zoomInfinite 60s linear infinite;
 }
+
+.btn-guest {
+    background-color: transparent;
+    border: 1px solid #00fff9;
+    color: #00fff9;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btn-guest:hover {
+    background-color: rgba(0, 255, 249, 0.1);
+    box-shadow: 0 0 10px #00fff9;
+}
+
 @keyframes zoomInfinite {
     0% {
         background-size: 100px 100px;

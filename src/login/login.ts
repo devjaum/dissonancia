@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './login.service';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { DatabaseService } from '../app/database.service';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
+export class Login implements OnInit {
   protected email = ''; 
   protected password = '';
   protected errorMessage = '';
@@ -22,6 +22,11 @@ export class Login {
     private dbService: DatabaseService,
     private router: Router // Injetar o Router
   ) {}
+
+  ngOnInit(){
+    //desautenticar qualquer usuario logado
+    this.dbService.logout();
+  }
 
   login() {
     if (!this.email || !this.password) {
@@ -48,5 +53,8 @@ export class Login {
         console.error('Login failed:', error);
         this.errorMessage = 'Erro ao entrar: Verifique o email e a senha.';
       });
+  }
+  goToGuest() {
+    this.router.navigate(['/guest']);
   }
 }

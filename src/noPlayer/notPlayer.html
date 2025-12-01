@@ -1,0 +1,104 @@
+<main class="guest-container">
+    <div class="overlay"></div>
+    
+    <header class="guest-header">
+        <h1 class="glitch-title">MODO OBSERVADOR</h1>
+        <p class="subtitle">> ACESSO LIMITADO: VISUALIZAÇÃO DE SISTEMA</p>
+    </header>
+
+    <div class="actions">
+        <button class="btn-action monster-btn" (click)="goToMonstropedia()">
+            <span>ACESSAR MONSTROPÉDIA</span>
+        </button>
+        <button class="btn-action login-btn" (click)="goBack()">
+            <span>VOLTAR AO LOGIN</span>
+        </button>
+    </div>
+
+    <section class="demo-area">
+        <h3>// PRÉ-VISUALIZAÇÃO DE FICHA</h3>
+        
+        <div class="card-container">
+            <div class="card" [class.flipped]="isFlipped" (click)="toggleFlip()">
+                
+                <div class="cardFront">
+                    <div class="front-sidebar">
+                        <div class="avatar-placeholder">?</div>
+                        <div class="sidebar-text">
+                            <h2 class="player-name">{{dummyPlayer.name}}</h2>
+                            <div class="player-class">{{dummyPlayer.class}}</div>
+                            <small style="color:#666; display:block; margin-top:5px">{{dummyPlayer.email}}</small>
+                        </div>
+                    </div>
+
+                    <div class="front-main">
+                        <div class="vitals-container">
+                            <div class="vital-row">
+                                <span class="vital-label">VIDA</span>
+                                <div class="bar-bg"><div class="bar-fill hp-fill"></div></div>
+                                <span class="vital-value">{{dummyPlayer.vida}}</span>
+                            </div>
+                            <div class="vital-row">
+                                <span class="vital-label">MANA</span>
+                                <div class="bar-bg"><div class="bar-fill mana-fill"></div></div>
+                                <span class="vital-value">{{dummyPlayer.mana}}</span>
+                            </div>
+                            <div class="vital-row">
+                                <span class="vital-label">SHINSU</span>
+                                <div class="bar-bg"><div class="bar-fill shinsu-fill"></div></div>
+                                <span class="vital-value">{{dummyPlayer.shinsu}}</span>
+                            </div>
+                        </div>
+
+                        <div class="lore-section">
+                            <h4>Registro de Memória</h4>
+                            <div class="lore-text">{{dummyPlayer.lore}}</div>
+                        </div>
+                        
+                        <div class="click-hint">> CLIQUE PARA VER DETALHES DE COMBATE</div>
+                    </div>
+                </div>
+
+                <div class="cardBack">
+                    <div class="back-header">
+                        <h3>STATUS DE COMBATE (DEMO)</h3>
+                        <small style="color: #666">SISTEMA V.1.0</small>
+                    </div>
+
+                    <div class="back-body">
+                        <div class="col-left">
+                            <div class="section-box">
+                                <span class="section-title">Habilidades Únicas</span>
+                                <div *ngFor="let skill of dummyPlayer.uniqueSkills" class="skill-row" [attr.data-tooltip]="skill.description">
+                                    <strong>{{skill.name}}</strong>
+                                </div>
+                            </div>
+
+                            <div class="section-box">
+                                <span class="section-title">Talentos</span>
+                                <div class="talents-flex">
+                                    <span *ngFor="let talent of dummyPlayer.talent" class="talent-tag" [attr.data-tooltip]="talent.description">
+                                        {{talent.name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-right">
+                            <span class="section-title">Atributos Base</span>
+                            <div class="attr-grid">
+                                <div class="attr-card"><span>FOR</span><b>{{dummyPlayer.status[0]}}</b></div>
+                                <div class="attr-card"><span>DES</span><b>{{dummyPlayer.status[1]}}</b><div class="attr-bonus">{{dummyPlayer.attrBonuses[1]}}</div></div>
+                                <div class="attr-card"><span>CON</span><b>{{dummyPlayer.status[2]}}</b></div>
+                                <div class="attr-card"><span>INT</span><b>{{dummyPlayer.status[3]}}</b><div class="attr-bonus">{{dummyPlayer.attrBonuses[3]}}</div></div>
+                                <div class="attr-card"><span>SAB</span><b>{{dummyPlayer.status[4]}}</b></div>
+                                <div class="attr-card"><span>CAR</span><b>{{dummyPlayer.status[5]}}</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
