@@ -86,4 +86,23 @@ export class DatabaseService {
 
     return collectionData(usersCollection, { idField: 'id' });
   }
+
+  isAuthenticated(): Observable<boolean> {
+    return authState(this.auth).pipe(
+      map(user => !!user)
+    );
+  }
+  logout() {
+    return this.auth.signOut();
+  }
+
+  isAdmin(): Observable<boolean> {
+    return authState(this.auth).pipe(
+      map(user => {
+        // Verifica se o email do usuário está na lista de admins
+        const adminEmails = 'admin@rpg.com';
+        return user ? adminEmails.includes(user.email || '') : false;
+        })
+    );
+  }
 }
