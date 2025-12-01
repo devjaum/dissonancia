@@ -86,7 +86,7 @@ export class CreatePerso implements OnInit {
               this.inteligencia.set(character.status[3]);
               this.sabedoria.set(character.status[4]);
               this.carisma.set(character.status[5]);
-              this.pointsAtt.set(10 - (this.forca() + this.destreza() + this.constituicao() + this.inteligencia() + this.sabedoria() + this.carisma() - 12));
+              this.pointsAtt.set(8 - (this.forca() + this.destreza() + this.constituicao() + this.inteligencia() + this.sabedoria() + this.carisma() - 12));
           }
 
           if (character.talent) {
