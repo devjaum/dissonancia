@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './notPlayer.html',
-  styleUrls: ['./notPlayer.css']
+  styleUrls: ['./notPlayer.css', './notPlayer2.css']
 })
 export class NotPlayer {
   constructor(private router: Router) {}

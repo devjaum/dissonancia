@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
     standalone: true,
     imports: [CommonModule],
     templateUrl: './home.html',
-    styleUrls: ['./home.css']
+    styleUrls: ['./home.css', './home2.css']
 })
 export class Home implements OnInit {
     constructor(
