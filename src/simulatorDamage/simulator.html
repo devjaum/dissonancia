@@ -3,7 +3,6 @@
 
     <div class="battle-arena">
         
-        <!-- JOGADOR -->
         <div class="fighter-card player-side" [class.active-turn]="battleStarted && turnOrder[currentTurnIndex] === player">
             <h2>{{player.name}}</h2>
             
@@ -39,6 +38,9 @@
                 </button>
                 <button class="btn-action heavy" (click)="performAttack(player, enemy, -1, 6)">
                     💥 Pesado (-1 Dado, +2 Dano)
+                </button>
+                <button class="btn-action dodge" (click)="dodge(player)">
+                        � dodge Esquivar (+2 Defesa até o próximo turno)
                 </button>
             </div>
         </div>
