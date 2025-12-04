@@ -31,6 +31,9 @@ export interface Fighter {
   passiveDef: number;
   magicDef: number;
   initiative: number;
+
+  isDodging: boolean;
+  fatigue: boolean;
 }
 
 
@@ -106,7 +109,8 @@ export class Simulator implements OnInit  {
     player: Fighter = {
         name: "Herói", isPlayer: true,
         str: 3, dex: 4, con: 3, int: 2, wis: 2, cha: 2,
-        maxHp: 0, currentHp: 0, passiveDef: 0, magicDef: 0, initiative: 0
+        maxHp: 0, currentHp: 0, passiveDef: 0, magicDef: 0, initiative: 0,
+        isDodging: false, fatigue: false
     };
 
     ngOnInit(){
@@ -116,7 +120,8 @@ export class Simulator implements OnInit  {
     enemy: Fighter = {
         name: "Sombra", isPlayer: false,
         str: 4, dex: 2, con: 3, int: 1, wis: 2, cha: 1,
-        maxHp: 0, currentHp: 0, passiveDef: 0, magicDef: 0, initiative: 0
+        maxHp: 0, currentHp: 0, passiveDef: 0, magicDef: 0, initiative: 0,
+        isDodging: false, fatigue: false
     };
 
     constructor(
@@ -201,40 +206,107 @@ export class Simulator implements OnInit  {
     performAttack(attacker: Fighter, defender: Fighter, weaponBonus: number = 0, baseDamage: number = 4) {
         let attrVal: number;
         let attrName: string;
-
         const logType: LogType = attacker.isPlayer ? 'player' : 'enemy';
 
         if (attacker.isPlayer) {
-        attrVal = attacker[this.selectedAttack.attr];
-        attrName = this.selectedAttack.label;
+            attrVal = attacker[this.selectedAttack.attr];
+            attrName = this.selectedAttack.label;
         } else {
-        attrVal = attacker.str > attacker.dex ? attacker.str : attacker.dex;
-        attrName = attacker.str > attacker.dex ? 'Força Bruta' : 'Agilidade';
+            // 0 = Atacar, 1 = Esquivar
+            let action = Math.floor(Math.random() * 2); 
+            
+            if (action === 0) {
+                attrVal = attacker.str > attacker.dex ? attacker.str : attacker.dex;
+                attrName = attacker.str > attacker.dex ? '🔨 Arma Pesada (FOR)' : '🗡️ Arma Leve (DES)';
+            } else {
+                // IA decide esquivar
+                this.dodge(attacker);
+                return;
+            }
         }
 
         this.log(`${attacker.name} usa ${attrName}!`, logType);
 
-        const { successes, rolls } = this.rollPool(attrVal, weaponBonus);
-        
-        const formattedRolls = rolls.join(', ');
-        this.log(`🎲 Dados: [${formattedRolls}] -> ${successes} Sucessos (DT ${defender.passiveDef})`, 'system');
 
-        if (successes >= defender.passiveDef) {
-        const extra = successes - defender.passiveDef;
-        const dmgBonus = extra * 2;
-        const total = baseDamage + dmgBonus;
+        const attackResult = this.rollPool(attrVal, weaponBonus);
+        const formattedRolls = attackResult.rolls.join(', ');
 
-        defender.currentHp -= total;
-        if (defender.currentHp < 0) defender.currentHp = 0;
+        let defenseThreshold = 0;
+        let isDodgeAttempt = false;
 
-        const critMsg = dmgBonus > 0 ? ` (CRÍTICO +${dmgBonus})` : '';
-        this.log(`💥 ACERTOU! Dano: ${baseDamage}${critMsg} = ${total}`, 'critical');
+        if (defender.isDodging) {
+            isDodgeAttempt = true;
+            this.log(`🤸 ${defender.name} tenta esquivar do ataque!`, defender.isPlayer ? 'player' : 'enemy');
+
+            const dodgeResult = this.rollPool(defender.dex);
+
+            this.log(`🎲 Ataque [${formattedRolls}] (${attackResult.successes}) VS Esquiva [${dodgeResult.rolls.join(', ')}] (${dodgeResult.successes})`, 'system');
+
+            if (dodgeResult.successes > attackResult.successes) {
+                this.log(`💨 ${defender.name} esquivou completamente!`, 'critical');
+                defender.isDodging = false;
+                this.checkWinCondition();
+                if (this.battleStarted) this.nextTurn();
+                return;
+            } else {
+                // ESQUIVA FALHOU
+                this.log(`💥 A esquiva falhou!`, 'fail');
+                defenseThreshold = 0; 
+            }
+            defender.isDodging = false;
+
         } else {
-        this.log(`💨 ERROU! Defesa prevaleceu.`, 'fail');
+            defenseThreshold = defender.passiveDef;
+            this.log(`🎲 Dados: [${formattedRolls}] -> ${attackResult.successes} Sucessos (DT ${defenseThreshold})`, 'system');
+        }
+
+       
+        if (isDodgeAttempt || attackResult.successes >= defenseThreshold) {
+
+            let extra = 0;
+            let mitigationMsg = "";
+
+            if (isDodgeAttempt) {
+                let d6 = Math.floor(Math.random() * 6) + 1;
+                
+                if (d6 > 4) {
+                    extra = Math.max(0, attackResult.successes - defender.passiveDef);
+                    mitigationMsg = " (Defesa parcial)";
+                    this.log(`🎲 Sorte na defesa [${d6}]. Armadura absorveu parte do impacto!`, 'system');
+                } else {
+
+                    extra = attackResult.successes;
+                    mitigationMsg = " (Guarda Aberta!)";
+                    this.log(`🎲 Azar na defesa [${d6}]. Dano direto sem armadura!`, 'fail');
+                }
+            } else {
+                extra = attackResult.successes - defender.passiveDef;
+            }
+
+            const dmgBonus = extra * 2;
+            const total = baseDamage + dmgBonus;
+
+            defender.currentHp -= total;
+            if (defender.currentHp < 0) defender.currentHp = 0;
+
+            const critMsg = dmgBonus > 0 ? ` (CRÍTICO +${dmgBonus}${mitigationMsg})` : mitigationMsg;
+            this.log(`🩸 ACERTOU! Dano: ${baseDamage}${critMsg} = ${total}`, 'critical');
+        } else {
+            this.log(`🛡️ Bloqueado pela Defesa Passiva.`, 'fail');
         }
 
         this.checkWinCondition();
         if (this.battleStarted) this.nextTurn();
+    }
+
+    dodge(actor: Fighter){
+        actor.fatigue = true;
+        actor.isDodging = true;
+
+        this.log(`${actor.name} assume postura de esquiva!`,actor.isPlayer ? 'player' : 'enemy');
+        this.log(`>> ${actor.name} tentará superar os sucessos do próximo ataque.`, 'system');
+
+        this.nextTurn();
     }
 
     checkWinCondition() {
