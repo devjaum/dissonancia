@@ -20,7 +20,7 @@ export class NotPlayer {
     class: 'Recrutador',
     email: 'guest@system.net',
     vida: 100,
-    mana: 50,
+    mana: 14,
     shinsu: 75,
     lore: 'Acesso temporário concedido para visualização dos sistemas da Dissonância. Esta ficha é uma simulação estática para fins de demonstração da interface de agentes.',
     status: [3, 4, 2, 5, 1, 0], // FOR, DES, CON, INT, SAB, CAR

@@ -1,0 +1,83 @@
+<main class="sim-container">
+    <h1 class="glitch-title">Simulador de Combate</h1>
+
+    <div class="battle-arena">
+        
+        <!-- JOGADOR -->
+        <div class="fighter-card player-side" [class.active-turn]="battleStarted && turnOrder[currentTurnIndex] === player">
+            <h2>{{player.name}}</h2>
+            
+            <div class="hp-bar-container">
+                <div class="hp-bar" [style.width.%]="(player.currentHp / player.maxHp) * 100"></div>
+                <span class="hp-text">{{player.currentHp}} / {{player.maxHp}} PV</span>
+            </div>
+
+            <div class="stats-config" *ngIf="!battleStarted">
+                <div class="stat-input"><label>FOR</label> <input type="number" [(ngModel)]="player.str"></div>
+                <div class="stat-input"><label>DES</label> <input type="number" [(ngModel)]="player.dex"></div>
+                <div class="stat-input"><label>CON</label> <input type="number" [(ngModel)]="player.con"></div>
+                <div class="stat-input"><label>INT</label> <input type="number" [(ngModel)]="player.int"></div>
+                <div class="stat-input"><label>SAB</label> <input type="number" [(ngModel)]="player.wis"></div>
+                <div class="stat-input"><label>CAR</label> <input type="number" [(ngModel)]="player.cha"></div>
+            </div>
+
+            <div class="derived-stats">
+                <p>🛡️ Defesa Física: {{player.passiveDef}}</p>
+            </div>
+
+            <div class="actions" *ngIf="battleStarted && turnOrder[currentTurnIndex] === player">
+                <div class="attack-selector">
+                    <label>Estilo de Combate:</label>
+                    <select [(ngModel)]="selectedAttack">
+                        <option *ngFor="let opt of attackOptions" [ngValue]="opt">
+                            {{opt.label}}
+                        </option>
+                    </select>
+                </div>
+                <button class="btn-action attack" (click)="performAttack(player, enemy, 0, 4)">
+                    ⚔️ Atacar ({{player[selectedAttack.attr]}}d6)
+                </button>
+                <button class="btn-action heavy" (click)="performAttack(player, enemy, -1, 6)">
+                    💥 Pesado (-1 Dado, +2 Dano)
+                </button>
+            </div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <!-- INIMIGO -->
+        <div class="fighter-card enemy-side" [class.active-turn]="battleStarted && turnOrder[currentTurnIndex] === enemy">
+            <h2>{{enemy.name}}</h2>
+            <div class="hp-bar-container">
+                <div class="hp-bar enemy-hp" [style.width.%]="(enemy.currentHp / enemy.maxHp) * 100"></div>
+                <span class="hp-text">{{enemy.currentHp}} / {{enemy.maxHp}} PV</span>
+            </div>
+            <div class="stats-config" *ngIf="!battleStarted">
+                <div class="stat-input"><label>FOR</label> <input type="number" [(ngModel)]="enemy.str"></div>
+                <div class="stat-input"><label>DES</label> <input type="number" [(ngModel)]="enemy.dex"></div>
+                <div class="stat-input"><label>CON</label> <input type="number" [(ngModel)]="enemy.con"></div>
+            </div>
+            <div class="derived-stats">
+                <p>🛡️ Defesa Física: {{enemy.passiveDef}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-start" *ngIf="!battleStarted" (click)="startBattle()">INICIAR SIMULAÇÃO</button>
+        <button class="btn-reset" *ngIf="battleStarted" (click)="reset()">REINICIAR</button>
+    </div>
+
+    <!-- LOG ATUALIZADO: Usa a classe [ngClass] baseada no tipo do log -->
+    <div class="console-log">
+        <h3>>> Registro de Combate_</h3>
+        <div class="logs">
+            <p *ngFor="let log of battleLog" [ngClass]="log.type">
+                <span class="prefix">>></span> {{log.message}}
+            </p>
+        </div>
+    </div>
+    <button (click)="home()" class="btn-home">
+        Voltar
+    </button>
+</main>

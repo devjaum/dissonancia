@@ -119,4 +119,7 @@ export class Home implements OnInit {
         this.router.navigate(['/create']);
     }
 
+    simulator(){
+        this.router.navigate(['/simulator']);
+    }
 }
