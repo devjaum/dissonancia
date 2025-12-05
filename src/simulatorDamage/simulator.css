@@ -161,7 +161,15 @@
     background-color: #fff;
     box-shadow: 0 0 10px var(--accent-color);
 }
-
+.btn-action.dodge {
+    background-color: #50C878;
+    color: #000;
+    border: 1px solid #555;
+}
+.btn-action.dodge:hover {
+    background-color: #66d88f;
+    border-color: #fff;
+}
 .btn-action.heavy {
     background-color: #444;
     color: #fff;

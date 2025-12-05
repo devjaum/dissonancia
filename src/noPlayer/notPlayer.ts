@@ -23,7 +23,7 @@ export class NotPlayer {
     mana: 14,
     shinsu: 75,
     lore: 'Acesso temporário concedido para visualização dos sistemas da Dissonância. Esta ficha é uma simulação estática para fins de demonstração da interface de agentes.',
-    status: [3, 4, 2, 5, 1, 0], // FOR, DES, CON, INT, SAB, CAR
+    status: [3, 4, 2, 5, 1, 5], // FOR, DES, CON, INT, SAB, CAR
     attrBonuses: ['', '+2', '', '+2', '', ''],
     uniqueSkills: [
         { name: 'Olhar do Observador', description: 'Permite analisar a estrutura do sistema sem interferir.' },
@@ -58,5 +58,9 @@ export class NotPlayer {
       //retornar description do talento
       const talento = this.dummyPlayer.talent.find(tal => tal.name === t);
       return talento ? talento.description : '';
+  }
+
+  goSimulator(){
+    this.router.navigate(['/simulator']);
   }
 }

@@ -49,7 +49,18 @@ export class Simulator implements OnInit  {
 
     character$: Observable<Fighter | null> = this.dbService.getCharacterByEmail().pipe(
      map(player => {
-        if (!player) return null;
+        if (!player){
+            let dex = 4;
+            let con = 2;
+            let int = 5;
+            let wis = 1;
+            return{
+                name: "Herói", isPlayer: true,
+                str: 3, dex: dex, con: con, int: 5, wis: 1, cha: 5,
+                maxHp: 0, currentHp: 0, passiveDef: (1+(Math.max(dex, con)/2)), magicDef: (1+(Math.max(int, wis)/2)), initiative: 0,
+                isDodging: false, fatigue: false
+            }
+        }
 
         const status = player.status || [0, 0, 0, 0, 0, 0];
         const talents = Array.isArray(player.talent) ? player.talent : [];
@@ -112,7 +123,6 @@ export class Simulator implements OnInit  {
         maxHp: 0, currentHp: 0, passiveDef: 0, magicDef: 0, initiative: 0,
         isDodging: false, fatigue: false
     };
-
     ngOnInit(){
         this.character$.subscribe(p => this.player = p!);
     }
@@ -129,7 +139,6 @@ export class Simulator implements OnInit  {
     ) {
         this.calculateStats(this.player);
         this.calculateStats(this.enemy);
-        
     }
 
     calculateStats(fighter: Fighter) {
