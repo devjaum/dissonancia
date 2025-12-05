@@ -89,8 +89,6 @@
     font-family: monospace;
 }
 
-/* --- REUTILIZAÇÃO DO CSS DO CARD --- */
-/* Copiado e adaptado de home.css para funcionar isoladamente */
 .card-container {
     width: var(--card-width);
     height: var(--card-height);

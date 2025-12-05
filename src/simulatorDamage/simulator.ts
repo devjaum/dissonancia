@@ -201,7 +201,7 @@ export class Simulator implements OnInit  {
     checkTurn() {
         const active = this.turnOrder[this.currentTurnIndex];
         if (!active.isPlayer) {
-            setTimeout(() => this.performAttack(active, this.player), 1000);
+            setTimeout(() => this.performAttack(active, this.player), 500);
         }
         if(active.isPlayer) this.turnTotal = Number(this.turnTotal) + 1;
     }
@@ -228,7 +228,6 @@ export class Simulator implements OnInit  {
                 attrVal = attacker.str > attacker.dex ? attacker.str : attacker.dex;
                 attrName = attacker.str > attacker.dex ? '🔨 Arma Pesada (FOR)' : '🗡️ Arma Leve (DES)';
             } else {
-                // IA decide esquivar
                 this.dodge(attacker);
                 return;
             }
@@ -258,7 +257,6 @@ export class Simulator implements OnInit  {
                 if (this.battleStarted) this.nextTurn();
                 return;
             } else {
-                // ESQUIVA FALHOU
                 this.log(`💥 A esquiva falhou!`, 'fail');
                 defenseThreshold = 0; 
             }
