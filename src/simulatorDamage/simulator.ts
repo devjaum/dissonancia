@@ -42,7 +42,7 @@ export interface Fighter {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './simulator.html',
-  styleUrls: ['./simulator.css']
+  styleUrls: ['./simulator.css', './simulator2.css']
 })
 export class Simulator implements OnInit  {
     private dbService = inject(DatabaseService);
