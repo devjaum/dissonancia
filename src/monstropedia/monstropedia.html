@@ -1,10 +1,17 @@
 <main class="monstropedia-container">
     <h1 class="glitch-title">Monstropédia</h1>
-    
+    <section class="search">
+        <h2>Buscar por nome:</h2>
+        <input type="text" 
+               placeholder="Digite o nome do monstro..." 
+               [(ngModel)]="searchTerm" 
+                (input)="filterMonsters()" />
+    </section>
     <section class="cardMonsters">
         <ul>
             <li *ngFor="let monster of monstroPedia" 
                 class="card" 
+                id="monster-{{monster.name}}"
                 [class.flipped]="isFlipped(monster.name)"
                 (click)="toggleFlip(monster.name)">
                 
