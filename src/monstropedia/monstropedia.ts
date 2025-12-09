@@ -1,21 +1,22 @@
-import { Component, inject } from '@angular/core'; // 1. Adicione 'inject'
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import monstroPediaJson from "../../public/monstropedia.json";
 import { Router } from '@angular/router';
-import { DatabaseService } from '../app/database.service'; // 2. Importe o DatabaseService
+import { DatabaseService } from '../app/database.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-monstropedia',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './monstropedia.html',
-  styleUrl: './monstropedia.css'
+  styleUrls: ['./monstropedia.css', 'search.css']
 })
 export class Monstropedia {
     monstroPedia = monstroPediaJson;
     flippedMonsters = new Set<string>();
-    
-    // 3. Injete o serviço de banco de dados
+    searchTerm: string = '';
     private dbService = inject(DatabaseService);
 
     constructor(
@@ -34,17 +35,37 @@ export class Monstropedia {
         }
     }
 
-    // 4. Atualize a função voltarHome
     voltarHome(){
-        // Verifica se o usuário está logado
         this.dbService.isAuthenticated().subscribe(isAuth => {
             if (isAuth) {
-                // Se for jogador logado, volta para a Home
                 this.router.navigate(['/home']);
             } else {
-                // Se não estiver logado (Guest), volta para a tela de convidado
                 this.router.navigate(['/guest']);
             }
         });
     }
+
+    filterMonsters() {
+        let value:any[] = [];
+        this.monstroPedia.filter(monster =>
+            value.push(monster.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
+        );
+        this.invisibleMonster(value)
+        return value;
+    }
+
+    invisibleMonster(value:any[]){
+        for(let i = 0; i < this.monstroPedia.length; i++){
+            const monsterElement = document.getElementById(`monster-${this.monstroPedia[i].name}`);
+            if (monsterElement) {
+                if(value[i]){
+                    monsterElement.style.display = 'block';
+                } else {
+                    monsterElement.style.display = 'none';
+                }
+            }
+        }
+        
+    }
+
 }
