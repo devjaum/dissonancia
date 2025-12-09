@@ -7,6 +7,15 @@ A aplicação serve como companheiro digital para jogadores e mestres, permitind
 
 ---
 
+## 🌐 Acesse
+
+O projeto está disponível online através do **GitHub Pages**, permitindo testar a aplicação diretamente no navegador sem necessidade de instalação.
+
+👉 **Acesse aqui:**  
+🔗 **[devjaum.github.io/dissonancia](https://devjaum.github.io/dissonancia/)**  
+
+> *Alguns recursos que dependem do Firebase podem exigir login para funcionar corretamente.*
+
 ## 🎨 Funcionalidades
 
 ### 🔐 Autenticação e Sistema
