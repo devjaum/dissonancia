@@ -1,2 +1,171 @@
-<main class="container">
+<main class="holo-container">
+    <div *ngFor="let item of data" class="content-wrapper">
+        
+        <header class="page-header">
+            <h1 class="glitch-title">{{item.title}}</h1>
+            <div class="subtitle">> ACESSO AO BANCO DE DADOS DE REGRAS</div>
+        </header>
+
+        <section class="holo-card wide intro-glow">
+            <div class="card-content">
+                <h2>Protocolo Básico</h2>
+                <p class="main-text">{{item.howToPlay}}</p>
+                <div class="meta-info">
+                    <div class="info-chip">
+                        <span class="label">Exemplo</span>
+                        <span class="value">{{item.example}}</span>
+                    </div>
+                    <div class="info-chip warning">
+                        <span class="label">Nota</span>
+                        <span class="value">{{item.note}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-deco top-right"></div>
+            <div class="tech-deco bottom-left"></div>
+        </section>
+
+        <h2 class="section-title">Mecânicas de Combate</h2>
+        
+        <div class="card-grid">
+            <div class="holo-card">
+                <div class="card-header">
+                    <h3>{{item.battle.initiative.title}}</h3>
+                    <div class="icon-box">⚡</div>
+                </div>
+                <div class="card-body">
+                    <p>{{item.battle.initiative.description}}</p>
+                    <div class="stat-row">
+                        <span>Fórmula:</span>
+                        <strong>1d6 + DES</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="holo-card">
+                <div class="card-header">
+                    <h3>{{item.battle.movement.title}}</h3>
+                    <div class="icon-box">🏃</div>
+                </div>
+                <div class="card-body">
+                    <p>{{item.battle.movement.description}}</p>
+                    <div class="stat-row">
+                        <span>Custo:</span>
+                        <strong>1 Zona / Turno</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="holo-card highlight-border">
+                <div class="card-header">
+                    <h3>{{item.battle.dodge.title}}</h3>
+                    <div class="icon-box">🛡️</div>
+                </div>
+                <div class="card-body">
+                    <p>{{item.battle.dodge.description}}</p>
+                    <div class="stat-block">
+                        <small>Teste:</small> <strong>{{item.battle.dodge.staggering}}</strong>
+                    </div>
+                    <div class="alert-box">
+                        {{item.battle.dodge.warning}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Ofensiva & Defensiva</h2>
+
+        <div class="combat-grid">
+            <div class="combat-column attack-col">
+                <h4 class="col-header">ATAQUE</h4>
+                
+                <div class="holo-card attack-card">
+                    <div class="card-badge">Físico</div>
+                    <p class="desc">{{item.battle.attack['attack-physical'].description}}</p>
+                    <div class="calc-line">
+                        <span>Teste:</span> {{item.battle.attack['attack-physical'].staggering}}
+                    </div>
+                    <div class="calc-line damage">
+                        <span>Dano:</span> Base + (sucessos × 2)
+                    </div>
+                </div>
+
+                <div class="holo-card attack-card">
+                    <div class="card-badge">Mágico</div>
+                    <p class="desc">{{item.battle.attack['attack-magic'].description}}</p>
+                    <div class="calc-line">
+                        <span>Teste:</span> {{item.battle.attack['attack-magic'].staggering}}
+                    </div>
+                    <div class="calc-line damage">
+                        <span>Dano:</span> Base + (sucessos × 2)
+                    </div>
+                </div>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="combat-column defense-col">
+                <h4 class="col-header">DEFESA</h4>
+
+                <div class="holo-card defense-card">
+                    <div class="card-badge def">Física</div>
+                    <p class="desc">{{item.battle.defense['defense-physical'].description}}</p>
+                    <div class="calc-box">
+                        1 + (Maior entre DES/2 ou CON/2)
+                    </div>
+                </div>
+
+                <div class="holo-card defense-card">
+                    <div class="card-badge def">Mágica</div>
+                    <p class="desc">{{item.battle.defense['defense-magic'].description}}</p>
+                    <div class="calc-box">
+                        1 + (Maior entre INT/2, SAB/2 ou CAR/2)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Níveis de Dificuldade para testes</h2>
+        
+        <div class="rank-strip">
+            <div class="rank-card trivial">
+                <div class="rank-header">
+                    <span class="rank-icon">I</span>
+                    <h4>{{item.DT.nivel.trivial.title}}</h4>
+                </div>
+                <div class="rank-val">{{item.DT.nivel.trivial.difficulty}}</div>
+                <p>{{item.DT.nivel.trivial.description}}</p>
+            </div>
+
+            <div class="rank-card desafiador">
+                <div class="rank-header">
+                    <span class="rank-icon">II</span>
+                    <h4>{{item.DT.nivel.desafiador.title}}</h4>
+                </div>
+                <div class="rank-val">{{item.DT.nivel.desafiador.difficulty}}</div>
+                <p>{{item.DT.nivel.desafiador.description}}</p>
+            </div>
+
+            <div class="rank-card epica">
+                <div class="rank-header">
+                    <span class="rank-icon">III</span>
+                    <h4>{{item.DT.nivel.epica.title}}</h4>
+                </div>
+                <div class="rank-val">{{item.DT.nivel.epica.difficulty}}</div>
+                <p>{{item.DT.nivel.epica.description}}</p>
+            </div>
+
+            <div class="rank-card lendaria">
+                <div class="rank-header">
+                    <span class="rank-icon">IV</span>
+                    <h4>{{item.DT.nivel.lendaria.title}}</h4>
+                </div>
+                <div class="rank-val glitch-text">{{item.DT.nivel.lendaria.difficulty}}</div>
+                <p>{{item.DT.nivel.lendaria.description}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="btn-back" (click)="goBack()">VOLTAR AO MENU</button>
 </main>
