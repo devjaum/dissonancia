@@ -3,7 +3,7 @@
         "title": "Sistema de Rolagem de Dados",
         "intro": "Bem-vindo ao sistema, utilizaremos uma reserva de dados (Dice Pool) de dados de 6 lados (d6)",
         "howToPlay": "Para realizar uma ação, você deve rolar um número de d6 igual à sua perícia ou atributo relevante. Cada d6 que resultar em 4, 5 ou 6 é considerado um 'sucesso'. O número de sucessos determina o quão bem-sucedida foi sua ação.",
-        "example": "Por exemplo, se você tem uma perícia de 3, você rolará 3d6. Se os resultados forem 2, 4 e 6, você terá dois sucessos (4 e 6).",
+        "example": " Se você tem uma perícia de 3, você rolará 3d6. Se os resultados forem {2, 4 e 6}, você terá dois sucessos (4 e 6).",
         "note": "Lembre-se de que algumas situações podem exigir um número mínimo de sucessos para serem bem-sucedidas, ou podem ter consequências adicionais dependendo do número de sucessos obtidos.",
         "battle": {
             "initiative": {
@@ -22,7 +22,7 @@
                 "attack-magic": {
                     "title": "Ataque Mágico",
                     "description": "É um ataque mágico, determinando o número de sucessos necessários para causar dano mágico.",
-                    "staggering": "Atributo de Conhecimento (Inteligência, Sabedoria ou Carisma)+ Talento de Magia",
+                    "staggering": "Atributo de Conhecimento (Inteligência, Sabedoria ou Carisma) + Talento de Magia",
                     "hit": "Se sucessos de Ataque for maior ou igual a defesa/esquiva, o ataque acerta",
                     "damage": "Todo ataque tem um Dano base (magia), para cada sucesso que superar a Defesa, acrescete +2 de Dano"
                 }
@@ -33,28 +33,28 @@
                     "title": "Defesa Física",
                     "description": "É uma defesa fixa, determinando o número de sucessos necessários para receber dano físico.",
                     "staggering": "1 + Maior entre (Destreza ÷ 2) e (Constituição ÷ 2). (Arredondado para baixo)",
-                    "example": "Por exemplo, se sua Destreza é 3 e sua Constituição é 5, sua defesa física será 1 + 2(5÷2) = 3 sucessos necessários para receber dano físico."
+                    "example": " Se sua Destreza é 3 e sua Constituição é 5, sua defesa física será 1 + 2(5÷2) = 3 sucessos necessários para receber dano físico."
                 },
                 "defense-magic": {
                     "title": "Defesa Mágica",
                     "description": "É uma defesa fixa, determinando o número de sucessos necessários para receber dano mágico.",
                     "staggering": "1 + Maior entre (Inteligência ÷ 2), (Sabedoria ÷ 2) e (Carisma ÷ 2). (Arredondado para baixo)",
-                    "example": "Por exemplo, se sua Inteligência é 4, sua Sabedoria é 2 e sua carisma é 1, sua defesa mágica será 1 + 2(4÷2) = 3 sucessos necessários para receber dano mágico."
+                    "example": " Se sua Inteligência é 4, sua Sabedoria é 2 e sua carisma é 1, sua defesa mágica será 1 + 2(4÷2) = 3 sucessos necessários para receber dano mágico."
                 }
 
             },
             "movement": {
                 "title": "Movimento",
                 "description": "O movimento em combate é baseado em zonas. Cada personagem pode se mover uma zona por turno sem custo. Movimentos adicionais podem exigir um teste de Destreza ou ter outras penalidades, dependendo da situação.",
-                "example": "Por exemplo, se um personagem deseja se mover duas zonas em um turno, ele pode precisar fazer um teste de Destreza (d6) para evitar penalidades em suas ações subsequentes."
+                "example": " Se um personagem deseja se mover duas zonas em um turno, ele pode precisar fazer um teste de Destreza (d6) para evitar penalidades em suas ações subsequentes."
             },
             "dodge": {
                 "title": "Esquiva",
                 "description": "Um personagem pode tentar esquivar-se de um ataque como uma ação.",
-                "staggering": "Destreza + Talento, se aplicável",
+                "staggering": " Destreza + Talento, se aplicável",
                 "example": "O personagem rola um número de d6 igual à sua Destreza mais qualquer talento relevante. Cada sucesso reduz o número de sucessos do ataque inimigo.",
                 "hit": "Se o número de sucessos do ataque inimigo for reduzido a -1 ou abaixo, o ataque erra.",
-                "warning": "Caso a esquiva falhe, o jogador gira 1d6, se tirar sucesso forçado (5 ou 6), consegue usar sua defesa, para tentar se defender. Caso ele falhe no sucesso forçado, sua defesa será zerada."
+                "warning": "Caso a esquiva falhe, o jogador gira 1d6, se tirar sucesso forçado (5 ou 6), consegue usar sua defesa, para tentar se defender. Caso ele falhe no sucesso forçado, sua defesa terá desvantagem (-1)."
             }
         },
         "DT":{

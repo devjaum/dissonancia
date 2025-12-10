@@ -46,7 +46,7 @@ export interface Fighter {
 })
 export class Simulator implements OnInit  {
     private dbService = inject(DatabaseService);
-
+    
     character$: Observable<Fighter | null> = this.dbService.getCharacterByEmail().pipe(
      map(player => {
         if (!player){
@@ -344,6 +344,12 @@ export class Simulator implements OnInit  {
     }
 
     home(){
-        this.router.navigate(['/home']);
+        this.dbService.isAuthenticated().subscribe(isAuth => {
+            if (isAuth) {
+                this.router.navigate(['/home']);
+            } else {
+                this.router.navigate(['/guest']);
+            }
+        });
     }
 }

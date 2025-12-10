@@ -53,6 +53,10 @@ export class NotPlayer {
     this.router.navigate(['/']);
   }
   
+  goToRollDices() {
+    this.router.navigate(['/rolldices']);
+  }
+
   // Função auxiliar para tooltips simulados
   talentoDescricao(t: string): string {
       //retornar description do talento

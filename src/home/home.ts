@@ -122,4 +122,8 @@ export class Home implements OnInit {
     simulator(){
         this.router.navigate(['/simulator']);
     }
+
+    rollDices(){
+        this.router.navigate(['/rolldices']);
+    }
 }
